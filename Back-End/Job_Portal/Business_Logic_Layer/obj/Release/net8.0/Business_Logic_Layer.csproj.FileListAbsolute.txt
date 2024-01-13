@@ -13,3 +13,19 @@ D:\Learning\Online job portal\Three\Job_Portal\Business_Logic_Layer\obj\Release\
 D:\Learning\Online job portal\Three\Job_Portal\Business_Logic_Layer\obj\Release\net8.0\refint\Business_Logic_Layer.dll
 D:\Learning\Online job portal\Three\Job_Portal\Business_Logic_Layer\obj\Release\net8.0\Business_Logic_Layer.pdb
 D:\Learning\Online job portal\Three\Job_Portal\Business_Logic_Layer\obj\Release\net8.0\ref\Business_Logic_Layer.dll
+D:\Task\Online_job_portal\Back-End\Job_Portal\Business_Logic_Layer\bin\Release\net8.0\Business_Logic_Layer.deps.json
+D:\Task\Online_job_portal\Back-End\Job_Portal\Business_Logic_Layer\bin\Release\net8.0\Business_Logic_Layer.dll
+D:\Task\Online_job_portal\Back-End\Job_Portal\Business_Logic_Layer\bin\Release\net8.0\Business_Logic_Layer.pdb
+D:\Task\Online_job_portal\Back-End\Job_Portal\Business_Logic_Layer\bin\Release\net8.0\Data_Access_Layer.dll
+D:\Task\Online_job_portal\Back-End\Job_Portal\Business_Logic_Layer\bin\Release\net8.0\Data_Access_Layer.pdb
+D:\Task\Online_job_portal\Back-End\Job_Portal\Business_Logic_Layer\obj\Release\net8.0\Business_Logic_Layer.csproj.AssemblyReference.cache
+D:\Task\Online_job_portal\Back-End\Job_Portal\Business_Logic_Layer\obj\Release\net8.0\Business_Logic_Layer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Task\Online_job_portal\Back-End\Job_Portal\Business_Logic_Layer\obj\Release\net8.0\Business_Logic_Layer.AssemblyInfoInputs.cache
+D:\Task\Online_job_portal\Back-End\Job_Portal\Business_Logic_Layer\obj\Release\net8.0\Business_Logic_Layer.AssemblyInfo.cs
+D:\Task\Online_job_portal\Back-End\Job_Portal\Business_Logic_Layer\obj\Release\net8.0\Business_Logic_Layer.csproj.CoreCompileInputs.cache
+D:\Task\Online_job_portal\Back-End\Job_Portal\Business_Logic_Layer\obj\Release\net8.0\Business_Logic_Layer.sourcelink.json
+D:\Task\Online_job_portal\Back-End\Job_Portal\Business_Logic_Layer\obj\Release\net8.0\Business_Logic_Layer.csproj.CopyComplete
+D:\Task\Online_job_portal\Back-End\Job_Portal\Business_Logic_Layer\obj\Release\net8.0\Business_Logic_Layer.dll
+D:\Task\Online_job_portal\Back-End\Job_Portal\Business_Logic_Layer\obj\Release\net8.0\refint\Business_Logic_Layer.dll
+D:\Task\Online_job_portal\Back-End\Job_Portal\Business_Logic_Layer\obj\Release\net8.0\Business_Logic_Layer.pdb
+D:\Task\Online_job_portal\Back-End\Job_Portal\Business_Logic_Layer\obj\Release\net8.0\ref\Business_Logic_Layer.dll

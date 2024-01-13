@@ -10,3 +10,16 @@ D:\Learning\Online job portal\Three\Job_Portal\Data_Access_Layer\obj\Release\net
 D:\Learning\Online job portal\Three\Job_Portal\Data_Access_Layer\obj\Release\net8.0\refint\Data_Access_Layer.dll
 D:\Learning\Online job portal\Three\Job_Portal\Data_Access_Layer\obj\Release\net8.0\Data_Access_Layer.pdb
 D:\Learning\Online job portal\Three\Job_Portal\Data_Access_Layer\obj\Release\net8.0\ref\Data_Access_Layer.dll
+D:\Task\Online_job_portal\Back-End\Job_Portal\Data_Access_Layer\bin\Release\net8.0\Data_Access_Layer.deps.json
+D:\Task\Online_job_portal\Back-End\Job_Portal\Data_Access_Layer\bin\Release\net8.0\Data_Access_Layer.dll
+D:\Task\Online_job_portal\Back-End\Job_Portal\Data_Access_Layer\bin\Release\net8.0\Data_Access_Layer.pdb
+D:\Task\Online_job_portal\Back-End\Job_Portal\Data_Access_Layer\obj\Release\net8.0\Data_Access_Layer.csproj.AssemblyReference.cache
+D:\Task\Online_job_portal\Back-End\Job_Portal\Data_Access_Layer\obj\Release\net8.0\Data_Access_Layer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Task\Online_job_portal\Back-End\Job_Portal\Data_Access_Layer\obj\Release\net8.0\Data_Access_Layer.AssemblyInfoInputs.cache
+D:\Task\Online_job_portal\Back-End\Job_Portal\Data_Access_Layer\obj\Release\net8.0\Data_Access_Layer.AssemblyInfo.cs
+D:\Task\Online_job_portal\Back-End\Job_Portal\Data_Access_Layer\obj\Release\net8.0\Data_Access_Layer.csproj.CoreCompileInputs.cache
+D:\Task\Online_job_portal\Back-End\Job_Portal\Data_Access_Layer\obj\Release\net8.0\Data_Access_Layer.sourcelink.json
+D:\Task\Online_job_portal\Back-End\Job_Portal\Data_Access_Layer\obj\Release\net8.0\Data_Access_Layer.dll
+D:\Task\Online_job_portal\Back-End\Job_Portal\Data_Access_Layer\obj\Release\net8.0\refint\Data_Access_Layer.dll
+D:\Task\Online_job_portal\Back-End\Job_Portal\Data_Access_Layer\obj\Release\net8.0\Data_Access_Layer.pdb
+D:\Task\Online_job_portal\Back-End\Job_Portal\Data_Access_Layer\obj\Release\net8.0\ref\Data_Access_Layer.dll

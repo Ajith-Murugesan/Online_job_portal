@@ -8,10 +8,11 @@ namespace Data_Access_Layer.Repositories
     public class UserAccountRepo : IUserAccount
     {
         private readonly IConfiguration _config;
-
-        public UserAccountRepo(IConfiguration configuration)
+        private readonly IMailService _mailService;
+        public UserAccountRepo(IConfiguration configuration, IMailService mailService)
         {
             _config = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _mailService = mailService;
         }
 
         public async Task<UserAccount> GetAccount(int id)
@@ -70,12 +71,14 @@ namespace Data_Access_Layer.Repositories
             {
                 await con.OpenAsync();
 
-                string insertQuery = "INSERT INTO user_account (user_name) VALUES (@UserName)";
+                string insertQuery = "INSERT INTO user_account (user_name,email,password) VALUES (@UserName,@email,@password)";
 
                 using (SqlCommand cmd = new SqlCommand(insertQuery, con))
                 {
                     cmd.Parameters.AddWithValue("@UserName", account.UserName);
-
+                    cmd.Parameters.AddWithValue("@email", account.Email);
+                    string password=_mailService.SendEmail(account.Email);
+                    cmd.Parameters.AddWithValue("@password", password);
                     await cmd.ExecuteScalarAsync();
 
                 }
