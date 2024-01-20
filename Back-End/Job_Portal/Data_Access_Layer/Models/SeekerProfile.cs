@@ -7,7 +7,8 @@
         public string LastName { get; set; } = string.Empty;
         public long CurrentSalary { get; set; }
 
-        // Navigation property
-        public UserAccount UserAccount { get; set; } = new UserAccount();
+       
     }
 }
+// Navigation property
+//public UserAccount UserAccount { get; set; } = new UserAccount();

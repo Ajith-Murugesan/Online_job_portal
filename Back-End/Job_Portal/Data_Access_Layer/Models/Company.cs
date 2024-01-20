@@ -9,7 +9,8 @@
         public string WebsiteUrl { get; set; } = string.Empty;
         public string CompanyImage { get; set; } = string.Empty;
 
-        // Navigation property
-        public BusinessStream BusinessStream { get; set; } = new BusinessStream();
+       
     }
 }
+// Navigation property
+//public BusinessStream BusinessStream { get; set; } = new BusinessStream();

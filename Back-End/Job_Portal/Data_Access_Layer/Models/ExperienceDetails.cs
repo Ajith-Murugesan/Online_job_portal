@@ -9,7 +9,8 @@
         public string JobTitle { get; set; } = string.Empty;
         public string CompanyName { get; set; } = string.Empty;
 
-        // Navigation property
-        public UserAccount UserAccount { get; set; } = new UserAccount();
+       
     }
 }
+// Navigation property
+//public UserAccount UserAccount { get; set; } = new UserAccount();

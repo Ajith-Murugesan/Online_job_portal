@@ -1,0 +1,12 @@
+D:\Task\Online_job_portal\Back-End\Job_Portal\Media_Storage\bin\Release\net8.0\Media_Storage.deps.json
+D:\Task\Online_job_portal\Back-End\Job_Portal\Media_Storage\bin\Release\net8.0\Media_Storage.dll
+D:\Task\Online_job_portal\Back-End\Job_Portal\Media_Storage\bin\Release\net8.0\Media_Storage.pdb
+D:\Task\Online_job_portal\Back-End\Job_Portal\Media_Storage\obj\Release\net8.0\Media_Storage.GeneratedMSBuildEditorConfig.editorconfig
+D:\Task\Online_job_portal\Back-End\Job_Portal\Media_Storage\obj\Release\net8.0\Media_Storage.AssemblyInfoInputs.cache
+D:\Task\Online_job_portal\Back-End\Job_Portal\Media_Storage\obj\Release\net8.0\Media_Storage.AssemblyInfo.cs
+D:\Task\Online_job_portal\Back-End\Job_Portal\Media_Storage\obj\Release\net8.0\Media_Storage.csproj.CoreCompileInputs.cache
+D:\Task\Online_job_portal\Back-End\Job_Portal\Media_Storage\obj\Release\net8.0\Media_Storage.sourcelink.json
+D:\Task\Online_job_portal\Back-End\Job_Portal\Media_Storage\obj\Release\net8.0\Media_Storage.dll
+D:\Task\Online_job_portal\Back-End\Job_Portal\Media_Storage\obj\Release\net8.0\refint\Media_Storage.dll
+D:\Task\Online_job_portal\Back-End\Job_Portal\Media_Storage\obj\Release\net8.0\Media_Storage.pdb
+D:\Task\Online_job_portal\Back-End\Job_Portal\Media_Storage\obj\Release\net8.0\ref\Media_Storage.dll

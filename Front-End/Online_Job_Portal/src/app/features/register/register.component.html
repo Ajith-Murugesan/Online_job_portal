@@ -1,0 +1,77 @@
+<main class="card-container slideUp-animation">
+  <div class="image-container">
+    <h1 class="company" routerLink="/" style="cursor: pointer;">ItzHirings <sup>&trade;</sup></h1>
+    <img src="../../../assets/images/signUp.svg" class="illustration" alt="" />
+    <p class="quote">Sign up today to get exciting Jobs!</p>
+    <a href="#btm" class="mobile-btm-nav">
+      <img src="../../../assets/images/dbl-arrow.png" alt="" />
+    </a>
+  </div>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="form-container slideRight-animation">
+      <h1 class="form-header">Get started</h1>
+
+      <div class="input-container" *ngFor="let field of formFields">
+        <label for="{{ field.name }}"></label>
+        <input
+          type="{{ field.type }}"
+          formControlName="{{ field.name }}"
+          id="{{ field.name }}"
+          required
+        />
+        <span>{{ field.label }}</span>
+        <div
+          class="error"
+          *ngIf="
+            !registrationForm.controls[field.name].valid &&
+            (registrationForm.controls[field.name].dirty ||
+              registrationForm.controls[field.name].touched)
+          "
+        >
+          {{ field.errorMessage }}
+        </div>
+      </div>
+      <div class="input-container mt-4" >
+        <label for="userType">USER TYPE</label> <br>
+        <select name="" id="lastname"  class="btn-select">
+            <option value=""></option>
+            <option value=1>Applicant</option>
+            <option value=2>Employeer</option>
+        </select>
+        <br>
+        <hr>
+        <span></span>
+      </div>
+      <div id="btm">
+        <button type="submit" class="submit-btn mt-4 text-white" style="background-color: #1DE789;">
+          Create Account
+        </button>
+        <p class="btm-text">
+          Already have an account..?
+          <a class="text-success" routerLink="/login" routerLinkActive="active">
+            Log in
+          </a>
+        </p>
+      </div>
+    </div>
+  </form>
+</main>
+
+<section class="outro-overlay disabled slideUp-animation" *ngIf="isSubmitted">
+  <h1 class="company">Basket <sup>&trade;</sup></h1>
+  <h1 class="outro-greeting">Thank's for signing up..!</h1>
+  <img src="../../../assets/images/shape.svg" alt="" class="shape" />
+  <img
+    src="../../../assets/images/signedUp.svg"
+    alt=""
+    id="signedUp-illustration"
+    class="slideRight-animation"
+  />
+  <div class="author-link">
+    &copy;&nbsp;
+    <a href="https://www.0xabdulkhalid.ml/">0xabdulkhalid</a> |
+    <a href="https://www.github.com/0xabdulkhalid/basket-sign-up-form/"
+      >Source Code</a
+    >
+  </div>
+</section>

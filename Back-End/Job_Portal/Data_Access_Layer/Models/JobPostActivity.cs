@@ -6,8 +6,9 @@
         public int JobPostId { get; set; }
         public DateTime ApplyDate { get; set; }
 
-        // Navigation properties
-        public UserAccount UserAccount { get; set; } = new UserAccount();
-        public JobPost JobPost { get; set; } = new JobPost();
+      
     }
 }
+// Navigation properties
+//public UserAccount UserAccount { get; set; } = new UserAccount();
+//public JobPost JobPost { get; set; } = new JobPost();

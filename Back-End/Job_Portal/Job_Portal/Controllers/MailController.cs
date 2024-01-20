@@ -1,4 +1,4 @@
-﻿using Data_Access_Layer.DTOs;
+﻿
 using Data_Access_Layer.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +17,7 @@ namespace Job_Portal.Controllers
         }
 
         [HttpPost]
-        public IActionResult SendEmail(EmailDto request)
+        public IActionResult SendEmail(string request)
         {
             _mailService.SendEmail(request);
             return Ok();

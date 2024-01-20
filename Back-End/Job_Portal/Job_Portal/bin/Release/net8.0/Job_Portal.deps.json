@@ -10,6 +10,7 @@
         "dependencies": {
           "Business_Logic_Layer": "1.0.0",
           "MailKit": "4.3.0",
+          "Media_Storage": "1.0.0",
           "Swashbuckle.AspNetCore": "6.4.0",
           "Business_Logic_Layer.Reference": "1.0.0.0"
         },
@@ -531,6 +532,11 @@
           "Data_Access_Layer.dll": {}
         }
       },
+      "Media_Storage/1.0.0": {
+        "runtime": {
+          "Media_Storage.dll": {}
+        }
+      },
       "Business_Logic_Layer.Reference/1.0.0.0": {
         "runtime": {
           "Business_Logic_Layer.dll": {
@@ -940,6 +946,11 @@
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
     },
     "Data_Access_Layer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Media_Storage/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

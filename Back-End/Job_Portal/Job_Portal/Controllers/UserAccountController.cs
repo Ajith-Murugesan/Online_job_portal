@@ -1,11 +1,12 @@
 ﻿using Business_Logic_Layer.IServices;
+using Data_Access_Layer.DTOs;
 using Data_Access_Layer.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Job_Portal.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("UserAccount/[action]")]
     [ApiController]
     public class UserAccountController : ControllerBase
     {
@@ -30,7 +31,7 @@ namespace Job_Portal.Controllers
             return Ok(res);
         }
         [HttpPost]
-        public async Task<ActionResult> CreateUser(UserAccount account)
+        public async Task<ActionResult> CreateUser(RegisterUser account)
         {
             var res = await userAccountService.CreateAccount(account);
             return Ok(res);
@@ -41,11 +42,22 @@ namespace Job_Portal.Controllers
             var res = await userAccountService.UpdateAccount(updatedAccount);
             return Ok(res);
         }
-
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateUserStatus(int id)
+        {
+            var res = await userAccountService.UpdateUserStatus(id);
+            return Ok(res);
+        }
         [HttpDelete]
         public async Task<ActionResult> DeleteAccount(int userId)
         {
             var res = await userAccountService.DeleteAccount(userId);
+            return Ok(res);
+        }
+        [HttpPut]
+        public async Task<ActionResult> ResetPassword(ResetPassword password)
+        {
+            var res = await userAccountService.ResetPassword(password);
             return Ok(res);
         }
     }

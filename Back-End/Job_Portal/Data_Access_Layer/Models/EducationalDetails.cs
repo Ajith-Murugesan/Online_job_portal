@@ -11,7 +11,8 @@
         public int Percentage { get; set; }
         public int CGPA { get; set; }
 
-        // Navigation property
-        public UserAccount UserAccount { get; set; } = new UserAccount();
+        
     }
 }
+// Navigation property
+// public UserAccount UserAccount { get; set; } = new UserAccount();

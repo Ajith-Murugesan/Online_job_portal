@@ -1,0 +1,76 @@
+<main class="card-container slideUp-animation">
+  <div class="image-container">
+    <h1 class="company" routerLink="/" style="cursor: pointer;">ItzHirings <sup>&trade;</sup></h1>
+    <img
+      src="../../../assets/images/signedUp.svg"
+      class="illustration"
+      alt=""
+    />
+    <p class="quote">Sign in today to see exciting updates!</p>
+    <a href="#btm" class="mobile-btm-nav">
+      <img src="../../../assets/images/dbl-arrow.png" alt="" />
+    </a>
+  </div>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="form-container slideRight-animation">
+      <h1 class="form-header">Sign in</h1>
+
+      <div class="input-container">
+        <label for="email"> </label>
+        <input type="email" formControlName="email" id="email" required />
+        <span>E-mail</span>
+        <div
+          class="error"
+          *ngIf="
+            !loginForm.controls['email'].valid &&
+            (loginForm.controls['email'].dirty ||
+              loginForm.controls['email'].touched)
+          "
+        >
+          Invalid email address
+        </div>
+      </div>
+
+      <div class="input-container">
+        <label for="password"> </label>
+        <input
+          type="password"
+          formControlName="password"
+          id="password"
+          required
+        />
+        <span>Password</span>
+        <div
+          class="error"
+          *ngIf="
+            !loginForm.controls['password'].valid &&
+            (loginForm.controls['password'].dirty ||
+              loginForm.controls['password'].touched)
+          "
+        >
+          Password is required
+        </div>
+      </div>
+
+      <div id="btm">
+        <button type="submit" class="submit-btn  mt-4 text-white" style="background-color: #1DE789;">
+          Sign in
+        </button>
+        <p class="btm-text">
+          Are you new to here..?
+          <a
+            routerLink="/register"
+            routerLinkActive="active"
+            class="text-success"
+            >Signup</a
+          >
+        </p>
+      </div>
+    </div>
+  </form>
+</main>
+
+<section
+  class="outro-overlay disabled slideUp-animation"
+  *ngIf="isLoggedIn"
+></section>

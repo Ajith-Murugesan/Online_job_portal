@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Job_Portal", "Job_Portal\Job_Portal.csproj", "{C27B7482-8296-4CF0-84B7-BAA723231F42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Job_Portal", "Job_Portal\Job_Portal.csproj", "{C27B7482-8296-4CF0-84B7-BAA723231F42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data_Access_Layer", "Data_Access_Layer\Data_Access_Layer.csproj", "{153902BB-AA49-4696-BB3A-A5136388EE73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data_Access_Layer", "Data_Access_Layer\Data_Access_Layer.csproj", "{153902BB-AA49-4696-BB3A-A5136388EE73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business_Logic_Layer", "Business_Logic_Layer\Business_Logic_Layer.csproj", "{C0990672-42CB-4ED9-8260-189CED7AE46B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business_Logic_Layer", "Business_Logic_Layer\Business_Logic_Layer.csproj", "{C0990672-42CB-4ED9-8260-189CED7AE46B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Media_Storage", "Media_Storage\Media_Storage.csproj", "{FEECFBE7-6754-4998-A9B2-A954E8092069}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{C0990672-42CB-4ED9-8260-189CED7AE46B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0990672-42CB-4ED9-8260-189CED7AE46B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0990672-42CB-4ED9-8260-189CED7AE46B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEECFBE7-6754-4998-A9B2-A954E8092069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEECFBE7-6754-4998-A9B2-A954E8092069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEECFBE7-6754-4998-A9B2-A954E8092069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEECFBE7-6754-4998-A9B2-A954E8092069}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
