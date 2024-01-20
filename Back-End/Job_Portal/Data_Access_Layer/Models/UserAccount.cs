@@ -9,15 +9,16 @@
         public string Password { get; set; } = string.Empty;
         public DateTime UserDOB { get; set; }
         public string Gender { get; set; } = string.Empty;
-        public string IsActive { get; set; } = string.Empty;
+        public bool IsActive { get; set; } = false;
         public long ContactNumber { get; set; }
         public string UserImage { get; set; } = string.Empty;
         public DateTime RegistrationDate { get; set; }
 
-        // Navigation properties
-     /*   public UserType UserType { get; set; } = new UserType();
-        public SeekerProfile SeekerProfile { get; set; } = new SeekerProfile();
-        public EducationalDetails EducationalDetails { get; set; } = new EducationalDetails();
-        public ExperienceDetails ExperienceDetails { get; set; } = new ExperienceDetails();*/
+       
     }
 }
+// Navigation properties
+/*   public UserType UserType { get; set; } = new UserType();
+   public SeekerProfile SeekerProfile { get; set; } = new SeekerProfile();
+   public EducationalDetails EducationalDetails { get; set; } = new EducationalDetails();
+   public ExperienceDetails ExperienceDetails { get; set; } = new ExperienceDetails();*/

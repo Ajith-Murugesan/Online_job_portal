@@ -1,4 +1,5 @@
-﻿using Data_Access_Layer.Models;
+﻿using Data_Access_Layer.DTOs;
+using Data_Access_Layer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,11 @@ namespace Data_Access_Layer.Interfaces
     {
         Task<UserAccount> GetAccount(int id);
         Task<ICollection<UserAccount>> GetAllUsers();
-        Task<UserAccount> CreateAccount(UserAccount account);
+        Task<RegisterUser> CreateAccount(RegisterUser account);
         Task<UserAccount> UpdateAccount(UserAccount updatedAccount);
         Task<string> DeleteAccount(int userId);
+
+        Task<string> UpdateUserStatus(int id);
+        Task<ResetPassword> ResetPassword(ResetPassword password);
     }
 }

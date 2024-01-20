@@ -23,18 +23,18 @@ namespace Data_Access_Layer.Repositories
 
             MailMessage message = new MailMessage();
             message.From = new MailAddress(fromMail);
-            message.Subject = "Welcome to Online Job Portal - Registration Successful";
+            message.Subject = "ItzHirings - Registration Successful";
             message.To.Add(new MailAddress(toEmail));
 
-            // Your registration message template
+            // registration message template
             string registrationMessage = "<html><body>" +
-                                        "<h2>Welcome to Online Job Portal!</h2>" +
+                                        "<h2>Welcome to ItzHirings!</h2>" +
                                         "<p>Thank you for registering. Your temporary password is: <a><strong>{temporaryPassword}</strong></a></p>" +
                                         "<p>Please login using this temporary password and change it for security reasons.</p>" +
                                         "</body></html>";
 
             
-            string temporaryPassword = GenerateRandomAlphanumericPassword(10); // Adjust the length as needed
+            string temporaryPassword = GenerateRandomAlphanumericPassword(10); 
 
            
             registrationMessage = registrationMessage.Replace("{temporaryPassword}", temporaryPassword);

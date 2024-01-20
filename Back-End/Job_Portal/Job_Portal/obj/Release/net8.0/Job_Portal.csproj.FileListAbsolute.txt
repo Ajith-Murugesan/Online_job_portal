@@ -147,3 +147,5 @@ D:\Task\Online_job_portal\Back-End\Job_Portal\Job_Portal\obj\Release\net8.0\refi
 D:\Task\Online_job_portal\Back-End\Job_Portal\Job_Portal\obj\Release\net8.0\Job_Portal.pdb
 D:\Task\Online_job_portal\Back-End\Job_Portal\Job_Portal\obj\Release\net8.0\Job_Portal.genruntimeconfig.cache
 D:\Task\Online_job_portal\Back-End\Job_Portal\Job_Portal\obj\Release\net8.0\ref\Job_Portal.dll
+D:\Task\Online_job_portal\Back-End\Job_Portal\Job_Portal\bin\Release\net8.0\Media_Storage.dll
+D:\Task\Online_job_portal\Back-End\Job_Portal\Job_Portal\bin\Release\net8.0\Media_Storage.pdb

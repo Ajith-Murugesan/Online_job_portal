@@ -1,4 +1,5 @@
 ﻿using Business_Logic_Layer.IServices;
+using Data_Access_Layer.DTOs;
 using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
 using Microsoft.Data.SqlClient;
@@ -30,7 +31,7 @@ namespace Business_Logic_Layer.Services
             return await _userAccount.GetAllUsers();
         }
 
-        public async Task<UserAccount> CreateAccount(UserAccount account)
+        public async Task<RegisterUser> CreateAccount(RegisterUser account)
         {
             return await _userAccount.CreateAccount(account);
         }
@@ -42,6 +43,15 @@ namespace Business_Logic_Layer.Services
         public async Task<string> DeleteAccount(int userId)
         {
             return await _userAccount.DeleteAccount(userId);
+        }
+        public async Task<string> UpdateUserStatus(int userId)
+        {
+            return await _userAccount.UpdateUserStatus(userId);
+        }
+
+        public async Task<ResetPassword> ResetPassword(ResetPassword password)
+        {
+            return await _userAccount.ResetPassword(password);
         }
     }
 }

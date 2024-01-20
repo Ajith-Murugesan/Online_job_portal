@@ -1015,6 +1015,16 @@
         "runtime": {
           "bin/placeholder/Data_Access_Layer.dll": {}
         }
+      },
+      "Media_Storage/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Media_Storage.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Media_Storage.dll": {}
+        }
       }
     }
   },
@@ -2987,12 +2997,18 @@
       "type": "project",
       "path": "../Data_Access_Layer/Data_Access_Layer.csproj",
       "msbuildProject": "../Data_Access_Layer/Data_Access_Layer.csproj"
+    },
+    "Media_Storage/1.0.0": {
+      "type": "project",
+      "path": "../Media_Storage/Media_Storage.csproj",
+      "msbuildProject": "../Media_Storage/Media_Storage.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Business_Logic_Layer >= 1.0.0",
       "MailKit >= 4.3.0",
+      "Media_Storage >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
   },
@@ -3031,6 +3047,9 @@
           "projectReferences": {
             "D:\\Task\\Online_job_portal\\Back-End\\Job_Portal\\Business_Logic_Layer\\Business_Logic_Layer.csproj": {
               "projectPath": "D:\\Task\\Online_job_portal\\Back-End\\Job_Portal\\Business_Logic_Layer\\Business_Logic_Layer.csproj"
+            },
+            "D:\\Task\\Online_job_portal\\Back-End\\Job_Portal\\Media_Storage\\Media_Storage.csproj": {
+              "projectPath": "D:\\Task\\Online_job_portal\\Back-End\\Job_Portal\\Media_Storage\\Media_Storage.csproj"
             }
           }
         }
