@@ -1,8 +1,10 @@
 ﻿using Data_Access_Layer.DTOs;
 using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
+using Data_Access_Layer.ViewModels;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using System.Data;
 
 namespace Data_Access_Layer.Repositories
 {
@@ -217,6 +219,47 @@ namespace Data_Access_Layer.Repositories
 
                 return userAccount;
             }
+        }
+
+        public async Task<ICollection<JobApplication>> GetJobApplicationById(int id)
+        {
+            List<JobApplication> jobapplications = new List<JobApplication>();
+
+            using (SqlConnection con = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+            {
+                await con.OpenAsync();
+
+                using (SqlCommand cmd = new SqlCommand("GetJobApplicationByEmployeerid", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@user_account_id", id);
+
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            jobapplications.Add(new JobApplication
+                            {
+                                UserAccountId = reader.GetInt32(0),
+                                JobPostId = reader.GetInt32(1),
+                                ApplyDate= reader.GetDateTime(2),
+                                CompanyName = reader.GetString(3),
+                                JobTypeName = reader.GetString(4),
+                                JobTitle = reader.GetString(5),
+                                JobDescription = reader.IsDBNull(6) ? "" : reader.GetString(6),
+                                CreatedDate = reader.GetDateTime(7),
+                                Address = reader.GetString(8),
+                                City = reader.GetString(9),
+                                State = reader.GetString(10),
+                                Pincode = reader.GetInt32(11),
+                                IsActive = reader.GetString(12)
+                            });
+                        }
+                    }
+                }
+            }
+
+            return jobapplications;
         }
     }
 }

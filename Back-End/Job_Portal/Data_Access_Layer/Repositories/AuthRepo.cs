@@ -50,7 +50,8 @@ namespace Data_Access_Layer.Repositories
                         signingCredentials: signIn);
                     var res = new LoginResponse{
                         Token= new JwtSecurityTokenHandler().WriteToken(token),
-                        UserTypename=user.UserTypeId.ToString()
+                        UserTypename=user.UserTypeId.ToString(),
+                        UserAccountId=user.UserAccountId
                     };
 
                     return res;
@@ -72,7 +73,7 @@ namespace Data_Access_Layer.Repositories
             {
                 await con.OpenAsync();
 
-                using (var command = new SqlCommand("SELECT Email, Password,user_type_id,is_active FROM user_account WHERE Email = @Email AND Password = @Password", con))
+                using (var command = new SqlCommand("SELECT user_account_id,Email, Password,user_type_id,is_active FROM user_account WHERE Email = @Email AND Password = @Password", con))
                 {
                     command.Parameters.AddWithValue("@Email", email);
                     command.Parameters.AddWithValue("@Password", password);
@@ -83,6 +84,7 @@ namespace Data_Access_Layer.Repositories
                         {
                             return new UserData
                             {
+                                UserAccountId = Convert.ToInt32(reader["user_account_id"]),
                                 Email = reader["Email"].ToString(),
                                 Password = reader["Password"].ToString(),
                                 UserTypeId = Convert.ToInt32(reader["user_type_id"]),

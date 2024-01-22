@@ -15,6 +15,7 @@ export const environment = {
         location:"https://localhost:7119/JobLocation/GetAll",
         jobById:"https://localhost:7119/JobPost/GetById/",
         deleteJob:"https://localhost:7119/JobPost/DeleteJobPost/",
-        appliedJobs:"https://localhost:7119/JobPostActivity/GetById/"
+        appliedJobs:"https://localhost:7119/JobPostActivity/GetById/",
+        jobApplications:"https://localhost:7119/UserAccount/GetJobApplications/"
     }
 };

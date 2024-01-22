@@ -8,6 +8,8 @@ import { JobpostComponent } from './employeer/jobpost/jobpost.component';
 import { AppliedJobsComponent } from './job_seeker/applied-jobs/applied-jobs.component';
 import { AddJobpostComponent } from './employeer/add-jobpost/add-jobpost.component';
 import { ManageJobpostComponent } from './employeer/manage-jobpost/manage-jobpost.component';
+import { JobApplicationsComponent } from './employeer/job-applications/job-applications.component';
+import { JobInvitationTemplateComponent } from './employeer/job-invitation-template/job-invitation-template.component';
 
 
 
@@ -20,7 +22,9 @@ import { ManageJobpostComponent } from './employeer/manage-jobpost/manage-jobpos
     JobpostComponent,
     AppliedJobsComponent,
     AddJobpostComponent,
-    ManageJobpostComponent
+    ManageJobpostComponent,
+    JobApplicationsComponent,
+    JobInvitationTemplateComponent
   ],
   imports: [
     CommonModule

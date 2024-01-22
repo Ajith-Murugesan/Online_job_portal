@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System.Net.Mail;
 using System.Net;
 using System.Text;
+using Data_Access_Layer.ViewModels;
 
 namespace Data_Access_Layer.Repositories
 {
@@ -33,7 +34,7 @@ namespace Data_Access_Layer.Repositories
                                         "</body></html>";
 
             
-            string temporaryPassword = GenerateRandomAlphanumericPassword(10); 
+            string temporaryPassword = GenerateRandomAlphanumericPassword(15); 
 
            
             registrationMessage = registrationMessage.Replace("{temporaryPassword}", temporaryPassword);
@@ -119,6 +120,107 @@ namespace Data_Access_Layer.Repositories
 
             registrationMessage = registrationMessage.Replace("{feedMsg}", feedback);
             message.Body = registrationMessage;
+            message.IsBodyHtml = true;
+
+            var smtpClient = new System.Net.Mail.SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential(fromMail, fromPassword),
+                EnableSsl = true,
+            };
+
+            smtpClient.Send(message);
+            return "Mail sent";
+        }
+
+        public string SendInviteEmail(string toEmail, EmailInvite invite)
+        {
+            string fromMail = "itzhirings@gmail.com";
+            string fromPassword = "kywarwgunmvtolrg";
+
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(fromMail);
+            message.Subject = "ItzHirings - Interview Invite";
+            message.To.Add(new MailAddress(toEmail));
+            EmailInvite invites = new EmailInvite
+            {
+                CompanyName = invite.CompanyName,
+                JobPosition = invite.JobPosition,
+                InterviewDate = invite.InterviewDate,
+                InterviewTime = invite.InterviewTime,
+                LocationName = invite.LocationName
+            };
+            // registration message template
+            string registrationMessage = "<html><body>" +
+                                        "<h2>Interview Invitation from ItzHirings!</h2>" +
+                                        "<h3>Company Name - {cmpname}</h3>" +
+                                        "<h4>Your account has been Rejected.</h4>" +
+                                        "<p>Sorry for you inconvience, Please go through the feedback message and try again.</p>" +
+                                        "</body></html>";
+            string emailTemplate = @"
+            <!DOCTYPE html>
+            <html lang=""en"">
+            <head>
+                <meta charset=""UTF-8"">
+                <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+                <title>Interview Invitation</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        margin: 0;
+                        padding: 0;
+                        background-color: #f4f4f4;
+                        text-align: center;
+                    }
+
+                    .container {
+                        max-width: 600px;
+                        margin: 20px auto;
+                        background-color: #fff;
+                        padding: 20px;
+                        border-radius: 8px;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    }
+
+                    h2 {
+                        color: #333;
+                    }
+
+                    p {
+                        color: #555;
+                    }
+
+                    .footer {
+                        margin-top: 20px;
+                        color: #888;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class=""container"">
+                    <h2>Interview Invitation</h2>
+                    <p>You are invited for an interview at:</p>
+                    <p><strong>{CompanyName}</strong></p>
+                    <p>Position: <strong>{JobPosition}</strong></p>
+                    <p>Date: <strong>{InterviewDate:yyyy-MM-dd}</strong></p>
+                    <p>Time: <strong>{InterviewTime:hh:mm tt}</strong></p>
+                    <p>Location: <strong>{LocationName}</strong></p>
+                    <p>We look forward to seeing you there!</p>
+                    <div class=""footer"">
+                        <p>Best regards,<br>Your Company</p>
+                    </div>
+                </div>
+            </body>
+            </html>
+        ";
+
+            emailTemplate = emailTemplate
+            .Replace("{CompanyName}", invite.CompanyName)
+            .Replace("{JobPosition}", invite.JobPosition)
+            .Replace("{InterviewDate}", invite.InterviewDate.ToString())
+            .Replace("{InterviewTime}", invite.InterviewTime.ToString())
+            .Replace("{LocationName}", invite.LocationName);
+            message.Body = emailTemplate;
             message.IsBodyHtml = true;
 
             var smtpClient = new System.Net.Mail.SmtpClient("smtp.gmail.com")

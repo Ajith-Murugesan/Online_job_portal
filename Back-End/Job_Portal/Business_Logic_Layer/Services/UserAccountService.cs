@@ -2,6 +2,7 @@
 using Data_Access_Layer.DTOs;
 using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
+using Data_Access_Layer.ViewModels;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -57,6 +58,11 @@ namespace Business_Logic_Layer.Services
         public async Task<UserAccount> GetUser(Login usr)
         {
             return await _userAccount.GetUser(usr);
+        }
+
+        public async Task<ICollection<JobApplication>> GetJobApplicationById(int id)
+        {
+            return await _userAccount.GetJobApplicationById(id);
         }
     }
 }

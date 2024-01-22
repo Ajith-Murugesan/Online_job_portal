@@ -23,6 +23,12 @@ namespace Job_Portal.Controllers
             var res = await userAccountService.GetAccount(id);
             return Ok(res);
         }
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetJobApplications(int id)
+        {
+            var res = await userAccountService.GetJobApplicationById(id);
+            return Ok(res);
+        }
         [HttpGet]
         public async Task<ActionResult> GetUser([FromQuery] Login login)
         {

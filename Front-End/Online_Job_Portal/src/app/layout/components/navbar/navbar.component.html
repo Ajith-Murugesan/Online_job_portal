@@ -1,21 +1,24 @@
-<div class="landing-page">
+<div class="landing-page" *ngIf="usertypeid != 3">
   <header>
     <div class="container">
-      <a href="#" class="logo">Itz <b>Hiringz</b></a>
+      <a  class="logo" routerLink="/landingpage">Itz <b>Hiringz</b></a>
 
       <ul class="links">
         <li routerLink="/landingpage">Home</li>
         <li routerLink="/jobpost">Jobs</li>
         <li routerLink="/companies" *ngIf="usertypeid != 2" >Companies</li>
         <li *ngIf="usertypeid === 1" routerLink="/appliedjobs">Applied Jobs</li>
-        <li *ngIf="usertypeid === 2" routerLink="/managejobs">Manage Jobs</li>
-        <li *ngIf="usertypeid === 2" routerLink="/managejobs">Applicants</li>
+        <li *ngIf="usertypeid === 2" routerLink="/managejob">Manage Jobs</li>
+        <li *ngIf="usertypeid === 2" routerLink="/jobapplications">Applicants</li>
         <li routerLink="/service" *ngIf="usertypeid != 1 && usertypeid != 2 ">Services</li>
         <li *ngIf="usertypeid != 1 && usertypeid != 2 " routerLink="/register" routerLinkActive="active" style="background-color: #1de789" class="signupbt">
           Sign up
         </li>
         <li *ngIf="usertypeid === 1 || usertypeid === 2" routerLink="/jobseekerprofile" routerLinkActive="active">
           <i class="bi bi-person-circle" style="margin-right: 2px;"></i>My Profile
+        </li>
+        <li *ngIf="usertypeid === 1 || usertypeid === 2" (click)="onLogout()">
+          <i class="bi bi-box-arrow-left" style="margin-right: 2px;"></i>Logout
         </li>
 
  

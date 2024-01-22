@@ -19,12 +19,15 @@ import { AddJobpostComponent } from './features/employeer/add-jobpost/add-jobpos
 import { ManageJobpostComponent } from './features/employeer/manage-jobpost/manage-jobpost.component';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './layout/components/navbar/navbar.component';
+import { JobApplicationsComponent } from './features/employeer/job-applications/job-applications.component';
+import { JobInvitationTemplateComponent } from './features/employeer/job-invitation-template/job-invitation-template.component';
 
 const routes: Routes = [
   {path: 'dashboard', component:DashboardComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'login', component:LoginComponent},
   {path: 'jobseekerprofile', component:JobseekerprofileComponent},
+  {path: 'jobseekerprofile/:id', component:JobseekerprofileComponent},
   {path: 'landingpage', component:LandingpageComponent},
   // {path: '', component:AppComponent},
   {path: 'sidebar', component:SidebarComponent},
@@ -39,7 +42,8 @@ const routes: Routes = [
   {path: 'feedback', component:FeedbackmodalComponent},
   {path: 'addjob', component:AddJobpostComponent},
   {path: 'managejob', component:ManageJobpostComponent},
-  // {path: '', component:NavbarComponent},
+   {path: 'jobapplications', component:JobApplicationsComponent},
+   {path: 'mailinvite', component:JobInvitationTemplateComponent},
  
 ];
 

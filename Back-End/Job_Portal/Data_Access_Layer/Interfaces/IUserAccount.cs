@@ -1,5 +1,6 @@
 ﻿using Data_Access_Layer.DTOs;
 using Data_Access_Layer.Models;
+using Data_Access_Layer.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace Data_Access_Layer.Interfaces
         Task<UserAccount> GetAccount(int id);
         Task<UserAccount> GetUser(Login usr);
         Task<ICollection<UserAccount>> GetAllUsers();
+        Task<ICollection<JobApplication>> GetJobApplicationById(int id);
         Task<RegisterUser> CreateAccount(RegisterUser account);
         Task<UserAccount> UpdateAccount(UserAccount updatedAccount);
         Task<UpdateUserStatusResponse> DeleteAccount(DeleteInfo deleteInfo);

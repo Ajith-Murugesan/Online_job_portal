@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
       this.loginForm.value.email === 'admin@gmail.com' &&
       this.loginForm.value.password === 'Admin@123'
     ) {
+      localStorage.setItem('Type:','3')
       this.toast.success({
         detail: 'WELCOME ADMIN',
         summary: 'Successfully logged in',
@@ -53,22 +54,20 @@ export class LoginComponent implements OnInit {
           if (response.ok) {
             const token = response.body.Token;
             const typeId = response.body.UserTypename;
+            const Id = response.body.UserAccountId;
             localStorage.setItem('Token:', token);
-            localStorage.setItem('Type:', response.body.UserTypename);
+            localStorage.setItem('id:', Id);
+            localStorage.setItem('Type:', typeId);
             this.toast.success({
               detail: 'WELCOME',
               summary: 'Successfully logged in',
               duration: 2000,
             });
-            if (this.loginForm.value.password.length === 10)
+            if (this.loginForm.value.password.length === 15)
               this.router.navigate(['/passwordreset']);
             else {
-              
+              // window.location.reload()
               this.router.navigate(['/landingpage'])
-            //   if (typeId === 1) this.router.navigate(['/jobseekernavbar']);
-            //   else 
-            //   // this.router.navigate(['/empnavbar']);
-            // return
             }
           } else {
             this.toast.error({

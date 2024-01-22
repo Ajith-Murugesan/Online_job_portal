@@ -6,6 +6,7 @@ import { environment } from '../../../../environments/environment';
 import { ICompany } from '../jobpost/models/ICompany';
 import { IAddJob } from '../jobpost/models/IAddJob';
 import { ILocation } from '../jobpost/models/ILocation';
+import { IJobApplication } from '../jobpost/models/IJobApplication';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,8 @@ export class EmployeerService {
   }
   deleteJob(id:number):Observable<string> {
     return this.httpClient.delete<string>(environment.API_endpoints.deleteJob+id);
+  }
+  getJobApplicationsbyId(id:any):Observable<IJobApplication[]> {
+    return this.httpClient.get<IJobApplication[]>(environment.API_endpoints.jobApplications+id);
   }
 }

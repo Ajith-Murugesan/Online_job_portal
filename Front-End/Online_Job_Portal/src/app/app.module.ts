@@ -29,6 +29,8 @@ import { AppliedJobsComponent } from './features/job_seeker/applied-jobs/applied
 import { AddJobpostComponent } from './features/employeer/add-jobpost/add-jobpost.component';
 import { ManageJobpostComponent } from './features/employeer/manage-jobpost/manage-jobpost.component';
 import { NgToastModule } from 'ng-angular-popup';
+import { JobApplicationsComponent } from './features/employeer/job-applications/job-applications.component';
+import { JobInvitationTemplateComponent } from './features/employeer/job-invitation-template/job-invitation-template.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +52,9 @@ import { NgToastModule } from 'ng-angular-popup';
     FeedbackmodalComponent,
     AppliedJobsComponent,
     AddJobpostComponent,
-    ManageJobpostComponent
+    ManageJobpostComponent,
+    JobApplicationsComponent,
+    JobInvitationTemplateComponent
   ],
   imports: [
     BrowserModule,

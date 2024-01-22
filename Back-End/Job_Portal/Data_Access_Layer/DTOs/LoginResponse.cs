@@ -10,5 +10,6 @@ namespace Data_Access_Layer.DTOs
     {
         public string Token { get; set; } = string.Empty;
         public string UserTypename { get; set; } = string.Empty;
+        public int UserAccountId { get; set; }
     }
 }

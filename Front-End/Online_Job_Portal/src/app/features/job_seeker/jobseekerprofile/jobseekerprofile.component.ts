@@ -5,7 +5,7 @@ import { IUserAccount } from '../../admin/Services/Models/IUserAccount';
 import { IEducationalDetail } from '../../admin/Services/Models/IEducationalDetail';
 import { IExperienceDetails } from '../../admin/Services/Models/IExperienceDetails';
 import { IJobSeekerprofile } from '../../register/services/models/IJobSeekerprofile';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-jobseekerprofile',
   templateUrl: './jobseekerprofile.component.html',
@@ -16,25 +16,29 @@ export class JobseekerprofileComponent implements OnInit {
   educationalDetails!: IEducationalDetail;
   experienceDetails!: IExperienceDetails;
   profile!:IJobSeekerprofile
-
-  constructor(private service: EducationaldetailsService) {}
+  userId!:number
+  constructor(private service: EducationaldetailsService,private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.userId = +params.get('id')!;     
+      console.log('User ID:', this.userId);
+    });
     const cred = this.decodeJwtToken(localStorage.getItem('Token:'));
     this.service.getUser({ Email: cred.Email, Password: cred.Password }).subscribe((data) => {
       this.UserDetails = data;
       localStorage.setItem('id', data.UserAccountId.toString());
     });
 
-    this.service.getEducationalDetails(localStorage.getItem('id')).subscribe((data) => {
+    this.service.getEducationalDetails(this.userId).subscribe((data) => {
       this.educationalDetails = data;
     });
 
-    this.service.getExperienceDetails(localStorage.getItem('id')).subscribe((data) => {
+    this.service.getExperienceDetails(this.userId).subscribe((data) => {
       this.experienceDetails = data;
     });
 
-    this.service.getJobseekerDetails(localStorage.getItem('id')).subscribe((data) => {
+    this.service.getJobseekerDetails(this.userId).subscribe((data) => {
       this.profile = data;
     });
   }

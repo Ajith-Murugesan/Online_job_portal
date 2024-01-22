@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
   usertypeid: number | null = null;
 
+  constructor(  private router: Router) {}
   ngOnInit() {
     const userTypeFromLocalStorage = localStorage.getItem('Type:');
     this.usertypeid = userTypeFromLocalStorage ? +userTypeFromLocalStorage : null;
+  }
+  onLogout():void{
+    localStorage.clear()
+    window.location.reload()
+    this.router.navigate(['/landingpage']);
   }
 }
