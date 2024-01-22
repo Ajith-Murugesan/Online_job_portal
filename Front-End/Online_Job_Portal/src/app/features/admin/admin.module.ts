@@ -4,6 +4,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ApprovedusersComponent } from './components/approvedusers/approvedusers.component';
 import { PendingusersComponent } from './components/pendingusers/pendingusers.component';
+import { FeedbackmodalComponent } from './components/feedbackmodal/feedbackmodal.component';
 
 
 
@@ -12,7 +13,8 @@ import { PendingusersComponent } from './components/pendingusers/pendingusers.co
     DashboardComponent,
     SidebarComponent,
     ApprovedusersComponent,
-    PendingusersComponent
+    PendingusersComponent,
+    FeedbackmodalComponent
   ],
   imports: [
     CommonModule

@@ -31,17 +31,17 @@
           {{ field.errorMessage }}
         </div>
       </div>
-      <div class="input-container mt-4" >
+      <div class="input-container mt-4">
         <label for="userType">USER TYPE</label> <br>
-        <select name="" id="lastname"  class="btn-select">
-            <option value=""></option>
-            <option value=1>Applicant</option>
-            <option value=2>Employeer</option>
+        <select name="userType" id="userType" class="btn-select" formControlName="userType">
+          <option value="1">Applicant</option>
+          <option value="2">Employer</option>
         </select>
         <br>
         <hr>
-        <span></span>
       </div>
+      
+      
       <div id="btm">
         <button type="submit" class="submit-btn mt-4 text-white" style="background-color: #1DE789;">
           Create Account

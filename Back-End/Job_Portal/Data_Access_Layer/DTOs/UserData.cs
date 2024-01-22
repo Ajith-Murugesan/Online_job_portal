@@ -11,5 +11,7 @@ namespace Data_Access_Layer.DTOs
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public int UserTypeId { get; set; }
+        public bool IsActive { get; set; } = false;
+    
     }
 }

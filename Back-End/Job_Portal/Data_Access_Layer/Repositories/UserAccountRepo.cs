@@ -61,10 +61,10 @@ namespace Data_Access_Layer.Repositories
                             Email = reader.GetString(2),
                             ContactNumber = reader.IsDBNull(3) ? 00000000000 : reader.GetInt64(3),
                             IsActive = reader.IsDBNull(4) ? false : reader.GetBoolean(4),
-                            UserTypeId=reader.IsDBNull(5) ? 0 :reader.GetInt32(5),
+                            UserTypeId = reader.IsDBNull(5) ? 0 : reader.GetInt32(5),
                             Password = reader.GetString(6),
                         });
-                            
+
                     }
                 }
             }
@@ -80,19 +80,20 @@ namespace Data_Access_Layer.Repositories
             {
                 await con.OpenAsync();
 
-                string insertQuery = "INSERT INTO user_account (user_name,email,password,contact_number) VALUES (@UserName,@email,@password,@contact_number)";
+                string insertQuery = "INSERT INTO user_account (user_name,email,password,contact_number,user_type_id) VALUES (@UserName,@email,@password,@contact_number,@typeid)";
 
                 using (SqlCommand cmd = new SqlCommand(insertQuery, con))
                 {
                     cmd.Parameters.AddWithValue("@UserName", account.UserName);
                     cmd.Parameters.AddWithValue("@email", account.Email);
-                    string password=_mailService.SendEmail(account.Email);
+                    string password = _mailService.SendEmail(account.Email);
                     cmd.Parameters.AddWithValue("@password", password);
                     cmd.Parameters.AddWithValue("@contact_number", account.ContactNumber);
+                    cmd.Parameters.AddWithValue("@typeid", account.UserTypeId);
                     await cmd.ExecuteScalarAsync();
 
                 }
-                
+
             }
 
             return account;
@@ -111,13 +112,13 @@ namespace Data_Access_Layer.Repositories
                     cmd.Parameters.AddWithValue("@UserId", updatedAccount.UserAccountId);
                     cmd.Parameters.AddWithValue("@UserName", updatedAccount.UserName);
 
-                    await cmd.ExecuteNonQueryAsync();                  
+                    await cmd.ExecuteNonQueryAsync();
                 }
             }
             return updatedAccount;
         }
 
-        public async Task<string> DeleteAccount(int userId)
+        public async Task<UpdateUserStatusResponse> DeleteAccount(DeleteInfo deleteInfo)
         {
             using (SqlConnection con = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
             {
@@ -127,14 +128,20 @@ namespace Data_Access_Layer.Repositories
 
                 using (SqlCommand cmd = new SqlCommand(deleteQuery, con))
                 {
-                    cmd.Parameters.AddWithValue("@UserId", userId);
+                    cmd.Parameters.AddWithValue("@UserId", deleteInfo.UserAccountId);
                     await cmd.ExecuteNonQueryAsync();
                 }
             }
-            return "User deleted successfully";
+            _mailService.SendFeedbackEmail(deleteInfo.Email,deleteInfo.Feedback);
+            var response = new UpdateUserStatusResponse
+            {
+                Message = "User deleted successfully"
+            };
+
+            return response;
         }
 
-        public async Task<string> UpdateUserStatus(int id)
+        public async Task<UpdateUserStatusResponse> UpdateUserStatus(UpdateUserStatus status)
         {
             using (SqlConnection con = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
             {
@@ -144,32 +151,72 @@ namespace Data_Access_Layer.Repositories
 
                 using (SqlCommand cmd = new SqlCommand(updateQuery, con))
                 {
-                    cmd.Parameters.AddWithValue("@UserId", id);
+                    cmd.Parameters.AddWithValue("@UserId", status.UserAccountId);
                     cmd.Parameters.AddWithValue("@UserStatus", 1);
 
                     await cmd.ExecuteNonQueryAsync();
                 }
             }
-            return "User Status updated successfully";
-        }
+            _mailService.SendverificationEmail(status.Email);
+            var response = new UpdateUserStatusResponse
+            {
+                Message = "User Status updated successfully"
+            };
 
+            return response;
+        }
+     
         public async Task<ResetPassword> ResetPassword(ResetPassword password)
         {
             using (SqlConnection con = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
             {
                 await con.OpenAsync();
 
-                string updateQuery = "UPDATE user_account SET password = @pass WHERE user_account_id = @UserId;";
+                string updateQuery = "UPDATE user_account SET password = @newpass WHERE email = @email and password=@oldpass;";
 
                 using (SqlCommand cmd = new SqlCommand(updateQuery, con))
                 {
-                    cmd.Parameters.AddWithValue("@UserId", password.UserAccountId);
-                    cmd.Parameters.AddWithValue("@pass", password.Password);
+                    cmd.Parameters.AddWithValue("@email", password.Email);
+                    cmd.Parameters.AddWithValue("@oldpass", password.oldPassword);
+                    cmd.Parameters.AddWithValue("@newpass", password.newPassword);
 
                     await cmd.ExecuteNonQueryAsync();
                 }
             }
             return password;
+        }
+
+        public async Task<UserAccount> GetUser(Login usr)
+        {
+            UserAccount userAccount = new UserAccount();
+
+            using (SqlConnection con = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+            {
+                await con.OpenAsync();
+
+                using (SqlCommand cmd = new SqlCommand("SELECT user_account_id, user_name, email, contact_number, is_active,user_type_id,password FROM user_account WHERE email = @email and password=@pass", con))
+                {
+                    cmd.Parameters.AddWithValue("@email", usr.Email);
+                    cmd.Parameters.AddWithValue("@pass", usr.Password);
+
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            userAccount.UserAccountId = reader.GetInt32(0);
+                            userAccount.UserName = reader.GetString(1);
+                            userAccount.Email = reader.GetString(2);
+                            userAccount.ContactNumber = reader.IsDBNull(3) ? 00000000000 : reader.GetInt64(3);
+                            userAccount.IsActive = reader.IsDBNull(4) ? false : reader.GetBoolean(4);
+                            userAccount.UserTypeId = reader.IsDBNull(5) ? 0 : reader.GetInt32(5);
+                            userAccount.Password = reader.GetString(6);
+
+                        }
+                    }
+                }
+
+                return userAccount;
+            }
         }
     }
 }

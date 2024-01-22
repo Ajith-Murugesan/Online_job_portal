@@ -94,7 +94,7 @@
       margin-left: auto;
     }
   }
-  .landing-page header .links li:last-child {
+  .landing-page header .links .signupbt {
     border-radius: 20px;
     padding: 10px 20px;
     color: #FFF;

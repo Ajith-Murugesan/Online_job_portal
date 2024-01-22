@@ -18,10 +18,17 @@ import { ApprovedusersComponent } from './features/admin/components/approveduser
 import { PendingusersComponent } from './features/admin/components/pendingusers/pendingusers.component';
 import { JobseekerprofileComponent } from './features/job_seeker/jobseekerprofile/jobseekerprofile.component';
 import { LandingpageComponent } from './core/components/landingpage/landingpage.component';
-import { ToastrModule } from 'ngx-toastr';
 import { AdminnavbarComponent } from './layout/components/adminnavbar/adminnavbar.component';
 import { PasswordresetComponent } from './features/passwordreset/passwordreset.component';
 import { CompaniesComponent } from './core/components/companies/companies.component';
+import { JobpostComponent } from './features/employeer/jobpost/jobpost.component';
+import { EmployeernavbarComponent } from './layout/components/employeernavbar/employeernavbar.component';
+import { JobseekernavbarComponent } from './layout/components/jobseekernavbar/jobseekernavbar.component';
+import { FeedbackmodalComponent } from './features/admin/components/feedbackmodal/feedbackmodal.component';
+import { AppliedJobsComponent } from './features/job_seeker/applied-jobs/applied-jobs.component';
+import { AddJobpostComponent } from './features/employeer/add-jobpost/add-jobpost.component';
+import { ManageJobpostComponent } from './features/employeer/manage-jobpost/manage-jobpost.component';
+import { NgToastModule } from 'ng-angular-popup';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,17 +43,24 @@ import { CompaniesComponent } from './core/components/companies/companies.compon
     LandingpageComponent,
     AdminnavbarComponent,
     PasswordresetComponent,
-    CompaniesComponent
+    CompaniesComponent,
+    JobpostComponent,
+    EmployeernavbarComponent,
+    JobseekernavbarComponent,
+    FeedbackmodalComponent,
+    AppliedJobsComponent,
+    AddJobpostComponent,
+    ManageJobpostComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
     CommonModule,
+    NgToastModule,
   ],
   providers: [provideClientHydration()],
   bootstrap: [AppComponent],

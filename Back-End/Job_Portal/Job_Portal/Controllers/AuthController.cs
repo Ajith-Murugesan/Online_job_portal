@@ -24,7 +24,7 @@ namespace Job_Portal.Controllers
 
             if (token != null)
             {
-                return Ok(new { Token = token });
+                return Ok(token);
             }
             else
             {

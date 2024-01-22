@@ -11,11 +11,12 @@ namespace Business_Logic_Layer.IServices
     public interface IUserAccountService
     {
         Task<UserAccount> GetAccount(int id);
+        Task<UserAccount> GetUser(Login usr);
         Task<ICollection<UserAccount>> GetAllUsers();
         Task<RegisterUser> CreateAccount(RegisterUser account);
         Task<UserAccount> UpdateAccount(UserAccount updatedAccount);
-        Task<string> DeleteAccount(int userId);
-        Task<string> UpdateUserStatus(int id);
+        Task<UpdateUserStatusResponse> DeleteAccount(DeleteInfo deleteInfo);
+        Task<UpdateUserStatusResponse> UpdateUserStatus(UpdateUserStatus status);
         Task<ResetPassword> ResetPassword(ResetPassword password);
     }
 }

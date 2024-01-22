@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
 import { LoginService } from '../register/services/login.service';
-import { response } from 'express';
-import { error } from 'console';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -21,9 +18,9 @@ export class LoginComponent implements OnInit {
   };
   constructor(
     private formBuilder: FormBuilder,
-    private toastr: ToastrService,
     private router: Router,
-    private service: LoginService
+    private service: LoginService,
+    private toast: NgToastService
   ) {}
 
   ngOnInit() {
@@ -40,28 +37,56 @@ export class LoginComponent implements OnInit {
         Password: this.loginForm.value.password,
       };
     }
-    
-    this.service.Login(this.User).subscribe(
-      response => {  
-        if (response.ok) {
-          const token = response.body.Token;
-          console.log(token)
-          sessionStorage.setItem('Token:', token);
-          alert("Successfully logged in")
-          this.router.navigate(['/landingpage']);
-        } else {
-         
-          console.error('Login failed:', response.status, response.statusText);
+    if (
+      this.loginForm.value.email === 'admin@gmail.com' &&
+      this.loginForm.value.password === 'Admin@123'
+    ) {
+      this.toast.success({
+        detail: 'WELCOME ADMIN',
+        summary: 'Successfully logged in',
+        duration: 2000,
+      });
+      this.router.navigate(['/dashboard']);
+    } else {
+      this.service.Login(this.User).subscribe(
+        (response) => {
+          if (response.ok) {
+            const token = response.body.Token;
+            const typeId = response.body.UserTypename;
+            localStorage.setItem('Token:', token);
+            localStorage.setItem('Type:', response.body.UserTypename);
+            this.toast.success({
+              detail: 'WELCOME',
+              summary: 'Successfully logged in',
+              duration: 2000,
+            });
+            if (this.loginForm.value.password.length === 10)
+              this.router.navigate(['/passwordreset']);
+            else {
+              
+              this.router.navigate(['/landingpage'])
+            //   if (typeId === 1) this.router.navigate(['/jobseekernavbar']);
+            //   else 
+            //   // this.router.navigate(['/empnavbar']);
+            // return
+            }
+          } else {
+            this.toast.error({
+              detail: 'SORRY',
+              summary: 'Invalid credentials',
+              duration: 2000,
+            });
+          }
+        },
+        (error) => {
+          this.toast.error({
+            detail: 'SORRY',
+            summary: 'Invalid credentials',
+            duration: 2000,
+          });
         }
-      },
-      error => {
-        alert("Invalid credentials in")
-        console.error('Login failed:', error);
-      }
-    );
-    
-    
-
-
+      );
+    }
   }
+  
 }

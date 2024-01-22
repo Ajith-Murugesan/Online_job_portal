@@ -23,7 +23,12 @@ namespace Job_Portal.Controllers
             var res = await userAccountService.GetAccount(id);
             return Ok(res);
         }
-
+        [HttpGet]
+        public async Task<ActionResult> GetUser([FromQuery] Login login)
+        {
+            var res = await userAccountService.GetUser(login);
+            return Ok(res);
+        }
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
@@ -43,15 +48,15 @@ namespace Job_Portal.Controllers
             return Ok(res);
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateUserStatus(int id)
+        public async Task<ActionResult> UpdateUserStatus(UpdateUserStatus status)
         {
-            var res = await userAccountService.UpdateUserStatus(id);
+            var res = await userAccountService.UpdateUserStatus(status);
             return Ok(res);
         }
         [HttpDelete]
-        public async Task<ActionResult> DeleteAccount(int userId)
+        public async Task<ActionResult> DeleteAccount(DeleteInfo deleteInfo)
         {
-            var res = await userAccountService.DeleteAccount(userId);
+            var res = await userAccountService.DeleteAccount(deleteInfo);
             return Ok(res);
         }
         [HttpPut]

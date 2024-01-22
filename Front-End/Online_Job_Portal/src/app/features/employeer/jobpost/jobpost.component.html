@@ -1,0 +1,27 @@
+
+
+<section id="cntr" *ngFor="let i of jobPosts">
+  <div class="container ">
+    <div class="card bg-light-subtle mt-4">
+      <img
+        src="https://www.logo.wine/a/logo/Amazon_(company)/Amazon_(company)-Logo.wine.svg"
+        class="card-img-top"
+        alt="..."
+      />
+      
+      <div class="card-body">
+        <div class="text-section">
+          <h3 class="card-title fw-bold">{{i.JobTitle}}</h3>
+          <p class="card-text">
+            {{i.JobDescription}}
+          </p>
+          <div><i class="bi bi-geo-alt"></i> {{i.City}}, {{i.State}}</div>
+        </div>
+        <div class="cta-section" >
+          <div style="background-color: #1DE789;border-radius: 5px;padding: 5px;color: white;">{{i.JobTypeName}}</div>
+          <a  class="btn btn-primary" (click)="applyJob(i.JobPostId)" >Apply</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
