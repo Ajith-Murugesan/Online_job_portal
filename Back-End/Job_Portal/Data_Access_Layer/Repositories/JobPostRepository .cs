@@ -1,7 +1,10 @@
-﻿using Data_Access_Layer.Interfaces;
+﻿using Data_Access_Layer.DTOs;
+using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
+using Data_Access_Layer.ViewModels;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using System.Data;
 
 namespace Data_Access_Layer.Repositories
 {
@@ -13,31 +16,38 @@ namespace Data_Access_Layer.Repositories
         {
             _config = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
-
-        public async Task<JobPost> GetJobPost(int jobPostId)
+        public async Task<ICollection<JobpostDetails>> GetJobPostById(int jobPostId)
         {
-            JobPost jobPost = new JobPost();
+            List<JobpostDetails> jobPost = new List<JobpostDetails>();
 
             using (SqlConnection con = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
             {
                 await con.OpenAsync();
 
-                using (SqlCommand cmd = new SqlCommand("SELECT job_post_id, user_account_id, company_id, job_type_id, job_description, created_date, location_id, is_active FROM job_post WHERE job_post_id = @JobPostId", con))
+                using (SqlCommand cmd = new SqlCommand("GetJobPostDetailsById", con)) 
                 {
-                    cmd.Parameters.AddWithValue("@JobPostId", jobPostId);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@JobPostId", jobPostId); 
 
                     using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                     {
-                        if (await reader.ReadAsync())
+                        while (await reader.ReadAsync())
                         {
-                            jobPost.JobPostId = reader.GetInt32(0);
-                            jobPost.UserAccountId = reader.GetInt32(1);
-                            jobPost.CompanyId = reader.GetInt32(2);
-                            jobPost.JobTypeId = reader.GetInt32(3);
-                            jobPost.JobDescription = reader.GetString(4);
-                            jobPost.CreatedDate = reader.GetDateTime(5);
-                            jobPost.LocationId = reader.GetInt32(6);
-                            jobPost.IsActive = reader.GetString(7);
+                            jobPost.Add(new JobpostDetails
+                            {
+                                JobPostId = reader.GetInt32(0),
+                                UserAccountId = reader.GetInt32(1),
+                                CompanyName = reader.GetString(2),
+                                JobTypeName = reader.GetString(3),
+                                JobDescription = reader.IsDBNull(4) ? "" : reader.GetString(4),
+                                JobTitle = reader.GetString(5),
+                                CreatedDate = reader.GetDateTime(6),
+                                Address = reader.GetString(7),
+                                City = reader.GetString(8),
+                                State = reader.GetString(9),
+                                Pincode = reader.GetInt32(10),
+                                IsActive = reader.GetString(11)
+                            });
                         }
                     }
                 }
@@ -45,6 +55,46 @@ namespace Data_Access_Layer.Repositories
 
             return jobPost;
         }
+
+        public async Task<ICollection<JobpostDetails>> GetJobPost()
+        {
+            List<JobpostDetails> jobPosts = new List<JobpostDetails>();
+
+            using (SqlConnection con = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+            {
+                await con.OpenAsync();
+
+                using (SqlCommand cmd = new SqlCommand("GetJobPostDetails", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            jobPosts.Add(new JobpostDetails
+                            {
+                                JobPostId = reader.GetInt32(0),
+                                UserAccountId = reader.GetInt32(1),
+                                CompanyName = reader.GetString(2),
+                                JobTypeName = reader.GetString(3),
+                                JobDescription = reader.IsDBNull(4) ? "" : reader.GetString(4),
+                                JobTitle= reader.GetString(5),
+                                CreatedDate = reader.GetDateTime(6),
+                                Address = reader.GetString(7),
+                                City = reader.GetString(8),
+                                State = reader.GetString(9),
+                                Pincode = reader.GetInt32(10),
+                                IsActive = reader.GetString(11)
+                            });
+                        }
+                    }
+                }
+            }
+
+            return jobPosts;
+        }
+
 
         public async Task<ICollection<JobPost>> GetAllJobPosts()
         {
@@ -54,7 +104,8 @@ namespace Data_Access_Layer.Repositories
             {
                 await con.OpenAsync();
 
-                using (SqlCommand cmd = new SqlCommand("SELECT job_post_id, user_account_id, company_id, job_type_id, job_description, created_date, location_id, is_active FROM job_post", con))
+                using (SqlCommand cmd = new SqlCommand("SELECT job_post_id, user_account_id, company_id, job_type_id, job_description, created_date, location_id, is_active,job_title FROM job_post", con))
+                
                 using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                 {
                     while (await reader.ReadAsync())
@@ -65,10 +116,11 @@ namespace Data_Access_Layer.Repositories
                             UserAccountId = reader.GetInt32(1),
                             CompanyId = reader.GetInt32(2),
                             JobTypeId = reader.GetInt32(3),
-                            JobDescription = reader.GetString(4),
-                            CreatedDate = reader.GetDateTime(5),
+                            JobDescription = reader.IsDBNull(1) ? "" : reader.GetString(4),
+                            CreatedDate = reader.IsDBNull(1) ? new DateTime() : reader.GetDateTime(5),
                             LocationId = reader.GetInt32(6),
-                            IsActive = reader.GetString(7)
+                            IsActive = reader.IsDBNull(1) ? "" :reader.GetString(7),
+                            JobTitle = reader.IsDBNull(1) ? "" : reader.GetString(8)
                         });
                     }
                 }
@@ -83,8 +135,8 @@ namespace Data_Access_Layer.Repositories
             {
                 await con.OpenAsync();
 
-                string insertQuery = "INSERT INTO job_post (user_account_id, company_id, job_type_id, job_description, created_date, location_id, is_active) " +
-                                     "VALUES (@UserAccountId, @CompanyId, @JobTypeId, @JobDescription, @CreatedDate, @LocationId, @IsActive);";
+                string insertQuery = "INSERT INTO job_post (user_account_id, company_id, job_type_id, job_description, location_id,job_title) " +
+                                     "VALUES (@UserAccountId, @CompanyId, @JobTypeId, @JobDescription, @LocationId,@title);";
 
                 using (SqlCommand cmd = new SqlCommand(insertQuery, con))
                 {
@@ -92,9 +144,8 @@ namespace Data_Access_Layer.Repositories
                     cmd.Parameters.AddWithValue("@CompanyId", jobPost.CompanyId);
                     cmd.Parameters.AddWithValue("@JobTypeId", jobPost.JobTypeId);
                     cmd.Parameters.AddWithValue("@JobDescription", jobPost.JobDescription);
-                    cmd.Parameters.AddWithValue("@CreatedDate", jobPost.CreatedDate);
                     cmd.Parameters.AddWithValue("@LocationId", jobPost.LocationId);
-                    cmd.Parameters.AddWithValue("@IsActive", jobPost.IsActive);
+                    cmd.Parameters.AddWithValue("@title", jobPost.JobTitle);
 
                     await cmd.ExecuteNonQueryAsync();
                 }
@@ -110,7 +161,7 @@ namespace Data_Access_Layer.Repositories
                 await con.OpenAsync();
 
                 string updateQuery = "UPDATE job_post SET user_account_id = @UserAccountId, company_id = @CompanyId, job_type_id = @JobTypeId, " +
-                                     "job_description = @JobDescription, created_date = @CreatedDate, location_id = @LocationId, is_active = @IsActive " +
+                                     "job_description = @JobDescription, created_date = @CreatedDate, location_id = @LocationId, is_active = @IsActive,job_title=@title " +
                                      "WHERE job_post_id = @JobPostId;";
 
                 using (SqlCommand cmd = new SqlCommand(updateQuery, con))
@@ -123,7 +174,7 @@ namespace Data_Access_Layer.Repositories
                     cmd.Parameters.AddWithValue("@CreatedDate", updatedJobPost.CreatedDate);
                     cmd.Parameters.AddWithValue("@LocationId", updatedJobPost.LocationId);
                     cmd.Parameters.AddWithValue("@IsActive", updatedJobPost.IsActive);
-
+                    cmd.Parameters.AddWithValue("@title", updatedJobPost.JobTitle);
                     await cmd.ExecuteNonQueryAsync();
                 }
             }
@@ -131,7 +182,7 @@ namespace Data_Access_Layer.Repositories
             return updatedJobPost;
         }
 
-        public async Task<string> DeleteJobPost(int jobPostId)
+        public async Task<UpdateUserStatusResponse> DeleteJobPost(int jobPostId)
         {
             using (SqlConnection con = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
             {
@@ -146,7 +197,12 @@ namespace Data_Access_Layer.Repositories
                 }
             }
 
-            return "JobPost deleted successfully";
+            var response = new UpdateUserStatusResponse
+            {
+                Message = "User deleted successfully"
+            };
+
+            return response;
         }
     }
 }

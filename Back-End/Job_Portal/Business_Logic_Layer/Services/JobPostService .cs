@@ -1,6 +1,8 @@
 ﻿using Business_Logic_Layer.IServices;
+using Data_Access_Layer.DTOs;
 using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
+using Data_Access_Layer.ViewModels;
 
 namespace Business_Logic_Layer.Services
 {
@@ -13,9 +15,9 @@ namespace Business_Logic_Layer.Services
             _jobPostRepository = jobPostRepository;
         }
 
-        public async Task<JobPost> GetJobPost(int jobPostId)
+        public async Task<ICollection<JobpostDetails>> GetJobPost()
         {
-            return await _jobPostRepository.GetJobPost(jobPostId);
+            return await _jobPostRepository.GetJobPost();
         }
 
         public async Task<ICollection<JobPost>> GetAllJobPosts()
@@ -33,9 +35,14 @@ namespace Business_Logic_Layer.Services
             return await _jobPostRepository.UpdateJobPost(updatedJobPost);
         }
 
-        public async Task<string> DeleteJobPost(int jobPostId)
+        public async Task<UpdateUserStatusResponse> DeleteJobPost(int jobPostId)
         {
             return await _jobPostRepository.DeleteJobPost(jobPostId);
+        }
+
+        public async Task<ICollection<JobpostDetails>> GetJobPostById(int jobPostId)
+        {
+            return await _jobPostRepository.GetJobPostById(jobPostId);
         }
     }
 }

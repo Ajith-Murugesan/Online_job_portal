@@ -8,6 +8,7 @@ namespace Data_Access_Layer.DTOs
 {
     public class UpdateUserStatus
     {
-        public bool IsActive { get; set; } = false;
+        public int UserAccountId { get; set; }
+        public string Email { get; set; } = string.Empty;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Business_Logic_Layer.IServices;
 using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
+using Data_Access_Layer.ViewModels;
 
 namespace Business_Logic_Layer.Services
 {
@@ -31,6 +32,11 @@ namespace Business_Logic_Layer.Services
         public async Task<string> WithdrawApplication(int userAccountId, int jobPostId)
         {
             return await _jobPostActivityRepository.WithdrawApplication(userAccountId, jobPostId);
+        }
+
+        public async Task<ICollection<JobpostDetails>> GetJobPostActivityByUserId(int userAccountId)
+        {
+            return await _jobPostActivityRepository.GetJobPostActivityByUserId(userAccountId);
         }
     }
 }

@@ -8,7 +8,9 @@ namespace Data_Access_Layer.DTOs
 {
     public class ResetPassword
     {
-        public int UserAccountId { get; set; }
-        public string Password { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string oldPassword { get; set; } = string.Empty;
+        public string newPassword { get; set; } = string.Empty;
+
     }
 }

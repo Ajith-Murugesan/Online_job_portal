@@ -1,116 +1,66 @@
 import { Component, OnInit } from '@angular/core';
 import { EducationaldetailsService } from '../../admin/Services/educationaldetails.service';
-
+import { JwtPayload, jwtDecode } from "jwt-decode";
+import { IUserAccount } from '../../admin/Services/Models/IUserAccount';
+import { IEducationalDetail } from '../../admin/Services/Models/IEducationalDetail';
+import { IExperienceDetails } from '../../admin/Services/Models/IExperienceDetails';
+import { IJobSeekerprofile } from '../../register/services/models/IJobSeekerprofile';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-jobseekerprofile',
   templateUrl: './jobseekerprofile.component.html',
-  styleUrl: './jobseekerprofile.component.css',
+  styleUrls: ['./jobseekerprofile.component.css'],
 })
 export class JobseekerprofileComponent implements OnInit {
-  constructor(private service: EducationaldetailsService) {}
-  educationalDetails!: any;
-  formProfileFields = [
-    {
-      name: 'firstName',
-      type: 'text',
-      label: 'First Name',
-      errorMessage: 'First name is required',
-     
-    },
-    {
-      name: 'lastName',
-      type: 'text',
-      label: 'Last Name',
-      errorMessage: 'First name is required',
-    },
-    {
-      name: 'email',
-      type: 'email',
-      label: 'E-mail',
-      errorMessage: 'Invalid email address',
-    },
-    {
-      name: 'phone',
-      type: 'tel',
-      label: 'Phone',
-      errorMessage: 'Phone number is required',
-    },
-  ];
-  formEducationalDetailFields = [
-    {
-      name: 'Degree',
-      type: 'text',
-      label: 'Degree',
-      errorMessage: 'Degree is required',
-      value:"educationalDetails.DegreeName"
-    },
-    {
-      name: 'Major',
-      type: 'text',
-      label: 'Major',
-      errorMessage: 'Major is required',
-      value:"educationalDetails.Major"
-    },
-    {
-      name: 'Institute Name',
-      type: 'text',
-      label: 'Institute Name',
-      errorMessage: 'Institute Name is required',
-      value:"educationalDetails.InstituteName"
-    },
-    {
-      name: 'cgpa',
-      type: 'text',
-      label: 'CGPA or Percentage',
-      errorMessage: 'CGPA or Percentage is required',
-      value:"educationalDetails.CGPA"
-    },
-    {
-      name: 'StartedDate',
-      type: 'date',
-      label: 'Started Date',
-      errorMessage: 'Started Date is required',
-      value:"educationalDetails.StartingDate"
-    },
-    {
-      name: 'CompletionDate',
-      type: 'date',
-      label: 'Completion Date',
-      errorMessage: 'Completion Dateis required',
-      value:"educationalDetails.CompletionDate"
-    },
-  ];
-  formExperienceDetailsFields = [
-    {
-      name: 'jobTitlte',
-      type: 'text',
-      label: 'Job Titlte',
-      errorMessage: 'Job Titlte is required',
-    },
-    {
-      name: 'companyName',
-      type: 'text',
-      label: 'Company Name',
-      errorMessage: 'Company name is required',
-    },
-    {
-      name: 'startDate',
-      type: 'date',
-      label: 'Start Date',
-      errorMessage: 'Start Date is required',
-    },
-    {
-      name: 'endDate',
-      type: 'date',
-      label: 'End Date',
-      errorMessage: 'End Date is required',
-    },
-  ];
-  
+  UserDetails!: IUserAccount;
+  educationalDetails!: IEducationalDetail;
+  experienceDetails!: IExperienceDetails;
+  profile!:IJobSeekerprofile
+  userId!:number
+  constructor(private service: EducationaldetailsService,private route: ActivatedRoute) {}
+
   ngOnInit(): void {
-    // this.service.getEducationalDetails(27).subscribe((data) => {
-    //   (this.educationalDetails = data), console.log(data);
-    // });
+    this.route.paramMap.subscribe(params => {
+      this.userId = +params.get('id')!;     
+      console.log('User ID:', this.userId);
+    });
+    const cred = this.decodeJwtToken(localStorage.getItem('Token:'));
+    this.service.getUser({ Email: cred.Email, Password: cred.Password }).subscribe((data) => {
+      this.UserDetails = data;
+      localStorage.setItem('id', data.UserAccountId.toString());
+    });
+
+    this.service.getEducationalDetails(this.userId).subscribe((data) => {
+      this.educationalDetails = data;
+    });
+
+    this.service.getExperienceDetails(this.userId).subscribe((data) => {
+      this.experienceDetails = data;
+    });
+
+    this.service.getJobseekerDetails(this.userId).subscribe((data) => {
+      this.profile = data;
+    });
   }
-  
+
+  decodeJwtToken(token: any): any {
+    interface DecodedToken extends JwtPayload {
+      Email: string;
+      Password: string;
+      
+    }
+
+    const decodedToken: DecodedToken = jwtDecode(token);
+    const email = decodedToken.Email;
+    const password = decodedToken.Password;
+    console.log(decodedToken)
+    return {
+      Email: email,
+      Password: password
+    };
+  }
+
+  saveProfile() {
+    alert('clicked');
+  }
 }

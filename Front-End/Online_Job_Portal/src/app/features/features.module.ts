@@ -4,6 +4,12 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { JobseekerprofileComponent } from './job_seeker/jobseekerprofile/jobseekerprofile.component';
 import { PasswordresetComponent } from './passwordreset/passwordreset.component';
+import { JobpostComponent } from './employeer/jobpost/jobpost.component';
+import { AppliedJobsComponent } from './job_seeker/applied-jobs/applied-jobs.component';
+import { AddJobpostComponent } from './employeer/add-jobpost/add-jobpost.component';
+import { ManageJobpostComponent } from './employeer/manage-jobpost/manage-jobpost.component';
+import { JobApplicationsComponent } from './employeer/job-applications/job-applications.component';
+import { JobInvitationTemplateComponent } from './employeer/job-invitation-template/job-invitation-template.component';
 
 
 
@@ -12,7 +18,13 @@ import { PasswordresetComponent } from './passwordreset/passwordreset.component'
     RegisterComponent,
     LoginComponent,
     JobseekerprofileComponent,
-    PasswordresetComponent
+    PasswordresetComponent,
+    JobpostComponent,
+    AppliedJobsComponent,
+    AddJobpostComponent,
+    ManageJobpostComponent,
+    JobApplicationsComponent,
+    JobInvitationTemplateComponent
   ],
   imports: [
     CommonModule

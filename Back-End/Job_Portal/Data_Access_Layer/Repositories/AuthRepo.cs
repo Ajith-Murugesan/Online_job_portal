@@ -6,6 +6,7 @@ using Microsoft.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Data_Access_Layer.Models;
 
 namespace Data_Access_Layer.Repositories
 {
@@ -20,15 +21,14 @@ namespace Data_Access_Layer.Repositories
  
         }
 
-        public async Task<string> Login(Login _userData)
+       // public async Task<string> Login(Login _userData)
+        public async Task<LoginResponse> Login(Login _userData)
         {
             if (_userData != null && _userData.Email != null && _userData.Password != null)
             {
                 var user = await GetAdmin(_userData.Email, _userData.Password);
-
-                if (user != null)
+                if (user != null && user.IsActive)
                 {
-                    // Create claims details based on the user information
                     var claims = new[]
                     {
                         new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
@@ -48,8 +48,13 @@ namespace Data_Access_Layer.Repositories
                         claims,
                         expires: DateTime.UtcNow.AddMinutes(10),
                         signingCredentials: signIn);
+                    var res = new LoginResponse{
+                        Token= new JwtSecurityTokenHandler().WriteToken(token),
+                        UserTypename=user.UserTypeId.ToString(),
+                        UserAccountId=user.UserAccountId
+                    };
 
-                    return new JwtSecurityTokenHandler().WriteToken(token);
+                    return res;
                 }
                 else
                 {
@@ -68,7 +73,7 @@ namespace Data_Access_Layer.Repositories
             {
                 await con.OpenAsync();
 
-                using (var command = new SqlCommand("SELECT Email, Password,user_type_id FROM user_account WHERE Email = @Email AND Password = @Password", con))
+                using (var command = new SqlCommand("SELECT user_account_id,Email, Password,user_type_id,is_active FROM user_account WHERE Email = @Email AND Password = @Password", con))
                 {
                     command.Parameters.AddWithValue("@Email", email);
                     command.Parameters.AddWithValue("@Password", password);
@@ -79,9 +84,11 @@ namespace Data_Access_Layer.Repositories
                         {
                             return new UserData
                             {
+                                UserAccountId = Convert.ToInt32(reader["user_account_id"]),
                                 Email = reader["Email"].ToString(),
                                 Password = reader["Password"].ToString(),
-                                UserTypeId = Convert.ToInt32(reader["user_type_id"])
+                                UserTypeId = Convert.ToInt32(reader["user_type_id"]),
+                                IsActive= Convert.ToBoolean(reader["is_active"].ToString())
                             };
                         }
                     }

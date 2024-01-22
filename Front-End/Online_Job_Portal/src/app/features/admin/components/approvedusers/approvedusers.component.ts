@@ -12,11 +12,8 @@ export class ApprovedusersComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getUsers().subscribe((data) => {
-      (this.UserDetails = data.filter(usr=>usr.IsActive===true)), console.log(data);
+      (this.UserDetails = data.filter(usr=>usr.IsActive===true));
     });
   }
-  UpdateStatus(id:number)
-  {
-   const response= this.service.updateUserStatus(id).subscribe(usr =>alert(usr.toString()));
- }
+ 
 }

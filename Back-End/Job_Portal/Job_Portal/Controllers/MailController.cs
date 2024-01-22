@@ -1,11 +1,12 @@
 ﻿
 using Data_Access_Layer.Interfaces;
+using Data_Access_Layer.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Job_Portal.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("Mail/[action]")]
     [ApiController]
     public class MailController : ControllerBase
     {
@@ -20,6 +21,13 @@ namespace Job_Portal.Controllers
         public IActionResult SendEmail(string request)
         {
             _mailService.SendEmail(request);
+            return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult EmailInvite(string toEmail,EmailInvite invite)
+        {
+            _mailService.SendInviteEmail(toEmail,invite);
             return Ok();
         }
     }

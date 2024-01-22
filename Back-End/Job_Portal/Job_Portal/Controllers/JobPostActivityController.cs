@@ -21,6 +21,12 @@ namespace Job_Portal.Controllers
             var res = await _jobPostActivityService.GetJobPostActivity(userAccountId, jobPostId);
             return Ok(res);
         }
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetById(int id)
+        {
+            var res = await _jobPostActivityService.GetJobPostActivityByUserId(id);
+            return Ok(res);
+        }
 
         [HttpGet]
         public async Task<ActionResult> GetAll()

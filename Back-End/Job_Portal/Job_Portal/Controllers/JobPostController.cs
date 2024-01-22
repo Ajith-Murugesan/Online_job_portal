@@ -14,11 +14,17 @@ namespace Job_Portal.Controllers
         {
             _jobPostService = jobPostService;
         }
-
         [HttpGet("{id}")]
-        public async Task<ActionResult> Get(int id)
+        public async Task<ActionResult> GetById(int id)
         {
-            var res = await _jobPostService.GetJobPost(id);
+            var res = await _jobPostService.GetJobPostById(id);
+            return Ok(res);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Get()
+        {
+            var res = await _jobPostService.GetJobPost();
             return Ok(res);
         }
 

@@ -9,6 +9,7 @@ namespace Data_Access_Layer.Interfaces
 {
     public interface IAuth
     {
-        Task<string> Login(Login login);
+       // Task<string> Login(Login login);
+        Task<LoginResponse> Login(Login login);
     }
 }

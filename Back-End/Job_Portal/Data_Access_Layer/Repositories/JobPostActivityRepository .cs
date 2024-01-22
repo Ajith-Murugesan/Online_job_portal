@@ -1,7 +1,9 @@
 ﻿using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
+using Data_Access_Layer.ViewModels;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using System.Data;
 
 namespace Data_Access_Layer.Repositories
 {
@@ -74,15 +76,13 @@ namespace Data_Access_Layer.Repositories
             {
                 await con.OpenAsync();
 
-                string insertQuery = "INSERT INTO job_post_activity (user_account_id, job_post_id, apply_date) " +
-                                     "VALUES (@UserAccountId, @JobPostId, @ApplyDate);";
+                string insertQuery = "INSERT INTO job_post_activity (user_account_id, job_post_id) " +
+                                     "VALUES (@UserAccountId, @JobPostId);";
 
                 using (SqlCommand cmd = new SqlCommand(insertQuery, con))
                 {
                     cmd.Parameters.AddWithValue("@UserAccountId", jobPostActivity.UserAccountId);
                     cmd.Parameters.AddWithValue("@JobPostId", jobPostActivity.JobPostId);
-                    cmd.Parameters.AddWithValue("@ApplyDate", jobPostActivity.ApplyDate);
-
                     await cmd.ExecuteNonQueryAsync();
                 }
             }
@@ -108,6 +108,46 @@ namespace Data_Access_Layer.Repositories
             }
 
             return "Application withdrawn successfully";
+        }
+
+        public async Task<ICollection<JobpostDetails>> GetJobPostActivityByUserId(int userAccountId)
+        {
+            List<JobpostDetails> jobPost = new List<JobpostDetails>();
+
+            using (SqlConnection con = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+            {
+                await con.OpenAsync();
+
+                using (SqlCommand cmd = new SqlCommand("GetJobPostActivityDetailsByid", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@user_account_id", userAccountId);
+
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            jobPost.Add(new JobpostDetails
+                            {
+                                UserAccountId = reader.GetInt32(0),
+                                JobPostId = reader.GetInt32(1),                               
+                                CompanyName = reader.GetString(3),
+                                JobTypeName = reader.GetString(4),
+                                JobTitle = reader.GetString(5),
+                                JobDescription = reader.IsDBNull(6) ? "" : reader.GetString(6),
+                                CreatedDate = reader.GetDateTime(7),
+                                Address = reader.GetString(8),
+                                City = reader.GetString(9),
+                                State = reader.GetString(10),
+                                Pincode = reader.GetInt32(11),
+                                IsActive = reader.GetString(12)
+                            });
+                        }
+                    }
+                }
+            }
+
+            return jobPost;
         }
     }
 }
