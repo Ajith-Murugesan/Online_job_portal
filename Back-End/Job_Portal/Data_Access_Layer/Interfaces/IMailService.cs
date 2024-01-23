@@ -8,6 +8,6 @@ namespace Data_Access_Layer.Interfaces
         string SendEmail(string  toEmail);
         string SendverificationEmail(string toEmail);
         string SendFeedbackEmail(string toEmail,string message);
-        string SendInviteEmail(string toEmail, EmailInvite invite);
+        EmailInvite SendInviteEmail(string toEmail, EmailInvite invite);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Business_Logic_Layer.IServices;
 using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
+using System.ComponentModel.Design;
 
 namespace Business_Logic_Layer.Services
 {
@@ -36,6 +37,11 @@ namespace Business_Logic_Layer.Services
         public async Task<string> DeleteCompany(int companyId)
         {
             return await _companyRepository.DeleteCompany(companyId);
+        }
+
+        public async Task<Company> GetCompanyByEmployeer(int empId)
+        {
+            return await _companyRepository.GetCompanyByEmployeer(empId);
         }
     }
 }

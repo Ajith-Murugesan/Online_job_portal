@@ -37,7 +37,7 @@ export class ManageJobpostComponent implements OnInit {
     }
   }
   getAll():void{
-    this.service.getJobsbyId(localStorage.getItem('id')).subscribe((data) => {
+    this.service.getJobsbyId(localStorage.getItem('id:')).subscribe((data) => {
       this.jobPosts = data;
     });
   }

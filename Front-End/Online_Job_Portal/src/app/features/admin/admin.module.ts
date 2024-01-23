@@ -10,11 +10,6 @@ import { FeedbackmodalComponent } from './components/feedbackmodal/feedbackmodal
 
 @NgModule({
   declarations: [
-    DashboardComponent,
-    SidebarComponent,
-    ApprovedusersComponent,
-    PendingusersComponent,
-    FeedbackmodalComponent
   ],
   imports: [
     CommonModule

@@ -3,6 +3,7 @@ export const environment = {
         userAccount:"https://localhost:7119/UserAccount/GetAll",
         updateUserStatus:`https://localhost:7119/UserAccount/`,
         educationalDetails:"https://localhost:7119/EducationalDetails/Get/",
+        saveeducationalDetails:"https://localhost:7119/EducationalDetails/CreateEducationalDetails",
         login:"https://localhost:7119/Auth/Login",
         resetPassword:"https://localhost:7119/UserAccount/ResetPassword",
         experienceDetails:"https://localhost:7119/ExperienceDetails/Get/",
@@ -16,6 +17,13 @@ export const environment = {
         jobById:"https://localhost:7119/JobPost/GetById/",
         deleteJob:"https://localhost:7119/JobPost/DeleteJobPost/",
         appliedJobs:"https://localhost:7119/JobPostActivity/GetById/",
-        jobApplications:"https://localhost:7119/UserAccount/GetJobApplications/"
+        jobApplications:"https://localhost:7119/UserAccount/GetJobApplications/",
+        emailInvite:"https://localhost:7119/Mail/EmailInvite?toEmail=",
+        createEmailInvite:"https://localhost:7119/SeekerProfile/CreateInterviewInvite",
+        getUserEmail:"https://localhost:7119/UserAccount/Get/",
+        getCompanyByEmployeer:"https://localhost:7119/Company/GetCompanyByEmployeer/",
+        jobseekerProfileSave:"https://localhost:7119/SeekerProfile/CreateSeekerProfile",
+        saveExperienceDetails:"https://localhost:7119/ExperienceDetails/CreateExperienceDetails",
+        getInterviewInviteById:"https://localhost:7119/SeekerProfile/GetInterviewInviteById/"
     }
 };

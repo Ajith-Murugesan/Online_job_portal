@@ -27,8 +27,11 @@ namespace Job_Portal.Controllers
         [HttpPost]
         public IActionResult EmailInvite(string toEmail,EmailInvite invite)
         {
-            _mailService.SendInviteEmail(toEmail,invite);
-            return Ok();
+            var res=_mailService.SendInviteEmail(toEmail,invite);
+            return Ok(/*new
+            {
+                message="Invited successfully"
+            }*/ res);
         }
     }
 }

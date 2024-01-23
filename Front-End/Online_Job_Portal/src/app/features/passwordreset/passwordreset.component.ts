@@ -5,6 +5,7 @@ import { JwtPayload, jwtDecode } from "jwt-decode";
 import { RegisterService } from '../register/services/register.service';
 import { IResetPassword } from '../register/services/models/IResetPassword';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-passwordreset',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class PasswordresetComponent {
   resetPasswordForm: any;
-  constructor(private fb: FormBuilder,private http: HttpClient,private service:RegisterService ,private router: Router) {}
+  constructor(private fb: FormBuilder,private http: HttpClient,private service:RegisterService ,private router: Router,private toast: NgToastService) {}
   resetPass:IResetPassword ={
     Email:'', 
     oldPassword: '',
@@ -45,8 +46,23 @@ export class PasswordresetComponent {
           oldPassword:password,
           newPassword:newPass.password
         }
-        this.service.resetPassword(this.resetPass).subscribe(data=>{alert("Password reset successfully")})
-        this.router.navigate(['/landingpage']);
+        this.service.resetPassword(this.resetPass).subscribe(
+          data => {
+            this.toast.success({
+              detail: 'SUCCESS',
+              summary: 'Password reset successfully, Login again',
+              duration: 2000,
+            });
+            this.router.navigate(['/login']);
+          },
+          error => {
+            this.toast.error({
+              detail: 'SORRY',
+              summary: 'Password reset failed. Please try again.',
+              duration: 2000,
+            });
+          }
+        );
       } else {
         console.error('No token found in session storage');
       }

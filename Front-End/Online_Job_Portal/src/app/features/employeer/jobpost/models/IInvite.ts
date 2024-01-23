@@ -1,10 +1,14 @@
 export interface IInvite {
-    JobPostId: number;
+    JobPostId: any;
     UserAccountId: any;
     CompanyName: string;
-    InterviewTime:'',
-    InterviewDate:''
+    CompanyId:any;
+    UserName:any
+    JobPosition:any;
+    InterviewTime:'';
+    InterviewDate:'';
     JobDescription: string;
-    LocationId: number;
+    LocationName: string;
+    LocationId:any
   }
   

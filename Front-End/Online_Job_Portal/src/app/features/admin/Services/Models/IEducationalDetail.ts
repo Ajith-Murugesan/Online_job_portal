@@ -1,5 +1,5 @@
 export interface IEducationalDetail{   
-    UserAccountId: number,
+    UserAccountId: any,
     DegreeName: string,
     Major:string,
     InstituteName: string,

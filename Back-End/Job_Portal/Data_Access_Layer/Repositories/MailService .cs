@@ -133,7 +133,7 @@ namespace Data_Access_Layer.Repositories
             return "Mail sent";
         }
 
-        public string SendInviteEmail(string toEmail, EmailInvite invite)
+        public EmailInvite SendInviteEmail(string toEmail, EmailInvite invite)
         {
             string fromMail = "itzhirings@gmail.com";
             string fromPassword = "kywarwgunmvtolrg";
@@ -169,7 +169,7 @@ namespace Data_Access_Layer.Repositories
                         font-family: Arial, sans-serif;
                         margin: 0;
                         padding: 0;
-                        background-color: #f4f4f4;
+                        background-color: white;
                         text-align: center;
                     }
 
@@ -198,16 +198,18 @@ namespace Data_Access_Layer.Repositories
             </head>
             <body>
                 <div class=""container"">
-                    <h2>Interview Invitation</h2>
+                    <h1>Hii {usrName} </h1>
+                    <h2>Interview Invitation From {CompanyName}</h2>
                     <p>You are invited for an interview at:</p>
                     <p><strong>{CompanyName}</strong></p>
                     <p>Position: <strong>{JobPosition}</strong></p>
-                    <p>Date: <strong>{InterviewDate:yyyy-MM-dd}</strong></p>
-                    <p>Time: <strong>{InterviewTime:hh:mm tt}</strong></p>
+                    <p>Date: <strong>{InterviewDate}</strong></p>
+                    <p>Time: <strong>{InterviewTime}</strong></p>
                     <p>Location: <strong>{LocationName}</strong></p>
+                    <p>Message: <strong>{Jobdesc}</strong></p>
                     <p>We look forward to seeing you there!</p>
                     <div class=""footer"">
-                        <p>Best regards,<br>Your Company</p>
+                        <p>Best regards,<br>{CompanyName}</p>
                     </div>
                 </div>
             </body>
@@ -219,7 +221,9 @@ namespace Data_Access_Layer.Repositories
             .Replace("{JobPosition}", invite.JobPosition)
             .Replace("{InterviewDate}", invite.InterviewDate.ToString())
             .Replace("{InterviewTime}", invite.InterviewTime.ToString())
-            .Replace("{LocationName}", invite.LocationName);
+            .Replace("{LocationName}", invite.LocationName)
+            .Replace("{Jobdesc}", invite.JobDescription)
+            .Replace("{usrName}",invite.UserName);
             message.Body = emailTemplate;
             message.IsBodyHtml = true;
 
@@ -231,7 +235,7 @@ namespace Data_Access_Layer.Repositories
             };
 
             smtpClient.Send(message);
-            return "Mail sent";
+            return invite;
         }
     }
 }

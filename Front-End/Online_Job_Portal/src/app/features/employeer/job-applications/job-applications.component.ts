@@ -8,12 +8,9 @@ import { IJobApplication } from '../jobpost/models/IJobApplication';
   templateUrl: './job-applications.component.html',
   styleUrl: './job-applications.component.css'
 })
-export class JobApplicationsComponent implements OnInit,AfterViewInit {
+export class JobApplicationsComponent implements OnInit {
   constructor(private service: EmployeerService,private toast:NgToastService) {}
-  ngAfterViewInit(): void {
-    this.jobApplications.forEach(job => this.onLoadfn(job.UserAccountId));
-    console.log("After viewinit")
-  }
+  
   jobApplications!: IJobApplication[];
   ngOnInit(): void {
     this.service.getJobApplicationsbyId(localStorage.getItem('id:')).subscribe((data) => {
@@ -22,9 +19,10 @@ export class JobApplicationsComponent implements OnInit,AfterViewInit {
     });
   }
 
-  onLoadfn(id:number)
-  {
-    console.log(`Card loaded for UserAccountId: ${id}`);
+  onInvite(userAccountId: number) {
+    // You can use the userAccountId as needed
+    console.log(`Inviting user with UserAccountId: ${userAccountId}`);
   }
+  
 
 }

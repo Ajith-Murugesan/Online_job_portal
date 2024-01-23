@@ -1,5 +1,6 @@
 ﻿using Business_Logic_Layer.IServices;
 using Data_Access_Layer.Models;
+using Data_Access_Layer.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Job_Portal.Controllers
@@ -28,11 +29,23 @@ namespace Job_Portal.Controllers
             var res = await _seekerProfileService.GetAllSeekerProfiles();
             return Ok(res);
         }
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetInterviewInviteById(int id)
+        {
+            var res = await _seekerProfileService.GetInterviewsById(id);
+            return Ok(res);
+        }
 
         [HttpPost]
         public async Task<ActionResult> CreateSeekerProfile(SeekerProfile seekerProfile)
         {
             var res = await _seekerProfileService.CreateSeekerProfile(seekerProfile);
+            return Ok(res);
+        }
+        [HttpPost]
+        public async Task<ActionResult> CreateInterviewInvite(EmailInvite invite)
+        {
+            var res = await _seekerProfileService.CreateInterviewInvite(invite);
             return Ok(res);
         }
 

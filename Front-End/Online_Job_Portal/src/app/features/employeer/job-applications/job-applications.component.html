@@ -1,20 +1,20 @@
-<div  class="container" *ngFor="let i of jobApplications">
-  <div class="card mx-auto" (onload)="onLoadfn(i.UserAccountId)" >
+<div class="container" *ngFor="let i of jobApplications">
+  <div class="card mx-auto">
     <div class="row">
       <div class="logo ml-3 mb-3">
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxDRpxI5gXgaVmnO-VgcVUNOkca91jIpS75Flbzkz5W_5g5_V5&usqp=CAU"
         />
       </div>
-      <h2 class="heading">Name</h2>
+      <h2 class="heading">{{i.UserName}}</h2>
     </div>
     <div class="card-title">
-      <h3 >
-       {{i.JobTitle}}
+      <h3>
+        {{ i.JobTitle }}
       </h3>
     </div>
     <p class="text-muted">
-        {{i.JobDescription}}
+      {{ i.JobDescription }}
     </p>
     <div class="row btnrow my-4">
       <div class="col-4 col-md-3">
@@ -23,7 +23,7 @@
           class="btn btn-outline-success btn-sm"
           style="background: #00ff002b"
         >
-        {{i.JobTitle}}
+          {{ i.JobTitle }}
         </button>
       </div>
       <div class="col-4 col-md-3">
@@ -32,30 +32,50 @@
           class="btn btn-outline-primary btn-sm"
           style="background: #007bff33"
         >
-        {{i.ApplyDate}}
+          {{ i.ApplyDate }}
         </button>
       </div>
-      <div class="col-4 col-md-3" style="margin-left: 15px;">
+      <div class="col-4 col-md-3" style="margin-left: 15px">
         <button
           type="button"
           class="btn btn-outline-danger btn-sm"
           style="background: #dc35452e"
         >
-        {{i.City}}
+          {{ i.City }}
         </button>
       </div>
     </div>
     <div class="row btnsubmit mt-4">
       <div class="col-md-6 col-6">
-        <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/jobseekerprofile', i.UserAccountId]">
+        <button
+          type="button"
+          class="btn btn-primary btn-lg"
+          [routerLink]="['/jobseekerprofile', i.UserAccountId]"
+        >
           <span>View Profile</span>
         </button>
       </div>
       <div class="col-md-6 col-6">
-        <button type="button" class="btn btn-dark btn-lg">
-          <span><app-job-invitation-template/></span>
+        <button
+          type="button"
+          class="btn btn-dark btn-lg"
+          data-toggle="modal"
+          data-target="#myModal"
+          id="btn"
+          style="border: none"
+          (click)="onInvite(i.UserAccountId)"
+        >
+          Invite
         </button>
       </div>
+      <app-job-invitation-template
+        [userAccountId]="i.UserAccountId"
+        [jobPostId]="i.JobPostId"
+        [jobJobPosition]="i.JobTitle"
+        [userName]="i.UserName"
+      ></app-job-invitation-template>
     </div>
   </div>
 </div>
+
+
