@@ -15,9 +15,7 @@
             <div class="formbold-input-flex">
               <div>
                 <label for="companyname" class="formbold-form-label">Company Name</label>
-                <select name="companyname" id="companyname" class="formbold-form-input" [(ngModel)]="jobPost.CompanyId" required>
-                  <option *ngFor="let companyItem of company" [value]="companyItem.CompanyId">{{companyItem.CompanyName}}</option>
-                </select>
+                <input type="text" name="companyname" id="companyname" placeholder="Company Name" class="formbold-form-input" [(ngModel)]="company.CompanyName" required>
               </div>
   
               <div>

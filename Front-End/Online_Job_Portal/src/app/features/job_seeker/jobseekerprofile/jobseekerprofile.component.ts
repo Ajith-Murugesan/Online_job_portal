@@ -6,6 +6,8 @@ import { IEducationalDetail } from '../../admin/Services/Models/IEducationalDeta
 import { IExperienceDetails } from '../../admin/Services/Models/IExperienceDetails';
 import { IJobSeekerprofile } from '../../register/services/models/IJobSeekerprofile';
 import { ActivatedRoute } from '@angular/router';
+import { JobSeekerService } from '../services/job-seeker.service';
+import { NgToastService } from 'ng-angular-popup';
 @Component({
   selector: 'app-jobseekerprofile',
   templateUrl: './jobseekerprofile.component.html',
@@ -13,11 +15,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class JobseekerprofileComponent implements OnInit {
   UserDetails!: IUserAccount;
+  userProfile:any={
+    FirstName:'',
+    LastName:''
+  }
   educationalDetails!: IEducationalDetail;
   experienceDetails!: IExperienceDetails;
   profile!:IJobSeekerprofile
   userId!:number
-  constructor(private service: EducationaldetailsService,private route: ActivatedRoute) {}
+  constructor( private toast:NgToastService,private service: EducationaldetailsService,private route: ActivatedRoute,private jservice: JobSeekerService) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -49,7 +55,6 @@ export class JobseekerprofileComponent implements OnInit {
       Password: string;
       
     }
-
     const decodedToken: DecodedToken = jwtDecode(token);
     const email = decodedToken.Email;
     const password = decodedToken.Password;
@@ -60,7 +65,62 @@ export class JobseekerprofileComponent implements OnInit {
     };
   }
 
-  saveProfile() {
-    alert('clicked');
+  saveProfile():void {
+    this.profile.UserAccountId=localStorage.getItem('id:')
+    this.jservice.saveProfileDetails(this.profile).subscribe(
+      usr => {
+        this.toast.success({
+          detail: "SUCCESS",
+          summary: 'Personal details saved!',
+          duration: 2000
+        });
+      },
+      error => {
+        this.toast.error({
+          detail: "SORRY",
+          summary: 'Try again, After sometime',
+          duration: 3000
+        });
+      }
+    );
+
+  }
+  saveEducationDetails():void {
+    this.educationalDetails.UserAccountId=localStorage.getItem('id:')
+    this.jservice.saveEduDetails(this.educationalDetails).subscribe(
+      usr => {
+        this.toast.success({
+          detail: "SUCCESS",
+          summary: 'Educational details saved!',
+          duration: 2000
+        });
+      },
+      error => {
+        this.toast.error({
+          detail: "SORRY",
+          summary: 'Try again, After sometime',
+          duration: 3000
+        });
+      }
+    );
+  }
+  saveExperience():void {
+    this.experienceDetails.UserAccountId=localStorage.getItem('id:')
+    this.jservice.saveExperienceDetails(this.experienceDetails).subscribe(
+      usr => {
+        this.toast.success({
+          detail: "SUCCESS",
+          summary: 'Experience details saved!',
+          duration: 2000
+        });
+      },
+      error => {
+        this.toast.error({
+          detail: "SORRY",
+          summary: 'Try again, After sometime',
+          duration: 3000
+        });
+      }
+    );
   }
 }

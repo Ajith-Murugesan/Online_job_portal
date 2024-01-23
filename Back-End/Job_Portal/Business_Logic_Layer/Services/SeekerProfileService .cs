@@ -1,6 +1,8 @@
 ﻿using Business_Logic_Layer.IServices;
 using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
+using Data_Access_Layer.ViewModels;
+using System.ComponentModel;
 
 namespace Business_Logic_Layer.Services
 {
@@ -36,6 +38,16 @@ namespace Business_Logic_Layer.Services
         public async Task<string> DeleteSeekerProfile(int userAccountId)
         {
             return await _seekerProfileRepository.DeleteSeekerProfile(userAccountId);
+        }
+
+        public async Task<EmailInvite> CreateInterviewInvite(EmailInvite invite)
+        {
+            return await _seekerProfileRepository.CreateInterviewInvite(invite);
+        }
+
+        public async Task<ICollection<EmailInvite>> GetInterviewsById(int userId)
+        {
+            return await _seekerProfileRepository.GetInterviewsById(userId);
         }
     }
 }

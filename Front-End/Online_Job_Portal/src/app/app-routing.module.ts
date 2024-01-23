@@ -21,6 +21,8 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './layout/components/navbar/navbar.component';
 import { JobApplicationsComponent } from './features/employeer/job-applications/job-applications.component';
 import { JobInvitationTemplateComponent } from './features/employeer/job-invitation-template/job-invitation-template.component';
+import { EmployeerProfileComponent } from './features/employeer/employeer-profile/employeer-profile.component';
+import { InterviewInvitesComponent } from './features/job_seeker/interview-invites/interview-invites.component';
 
 const routes: Routes = [
   {path: 'dashboard', component:DashboardComponent},
@@ -29,7 +31,7 @@ const routes: Routes = [
   {path: 'jobseekerprofile', component:JobseekerprofileComponent},
   {path: 'jobseekerprofile/:id', component:JobseekerprofileComponent},
   {path: 'landingpage', component:LandingpageComponent},
-  // {path: '', component:AppComponent},
+  {path: '', component:LandingpageComponent},
   {path: 'sidebar', component:SidebarComponent},
   {path: 'approvedusers', component:ApprovedusersComponent},
   {path: 'pendingusers', component:PendingusersComponent},
@@ -44,6 +46,9 @@ const routes: Routes = [
   {path: 'managejob', component:ManageJobpostComponent},
    {path: 'jobapplications', component:JobApplicationsComponent},
    {path: 'mailinvite', component:JobInvitationTemplateComponent},
+   {path: 'empprofile', component:EmployeerProfileComponent},
+   {path: 'invites', component:InterviewInvitesComponent},
+ 
  
 ];
 

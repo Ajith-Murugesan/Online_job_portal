@@ -22,6 +22,13 @@ namespace Job_Portal.Controllers
             return Ok(res);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetCompanyByEmployeer(int id)
+        {
+            var res = await _companyService.GetCompanyByEmployeer(id);
+            return Ok(res);
+        }
+
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {

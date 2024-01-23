@@ -1,14 +1,3 @@
-<button
-  type="button"
-  class="btn btn-dark btn-lg"
-  data-toggle="modal"
-  data-target="#myModal"
-  id="btn"
-  style="border: none"
->
-  Invite
-</button>
-
 <div class="modal" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -23,23 +12,8 @@
         <form (submit)="submitForm()" #jobForm="ngForm">
           <div class="formbold-input-flex">
             <div>
-              <label for="companyname" class="formbold-form-label"
-                >Company Name</label
-              >
-              <select
-                name="companyname"
-                id="companyname"
-                class="formbold-form-input"
-                [(ngModel)]="jobPost.CompanyId"
-                required
-              >
-                <option
-                  *ngFor="let companyItem of company"
-                  [value]="companyItem.CompanyId"
-                >
-                  {{ companyItem.CompanyName }}
-                </option>
-              </select>
+              <label for="companyname" class="formbold-form-label">Company Name</label>
+              <input type="text" name="companyname" id="companyname" placeholder="Company Name" class="formbold-form-input" [(ngModel)]="company.CompanyName" required>
             </div>
             <div>
               <label for="jobtitle" class="formbold-form-label"
@@ -51,7 +25,7 @@
                 id="date"
                 placeholder="Interview Date"
                 class="formbold-form-input"
-                [(ngModel)]="jobPost.JobTitle"
+                [(ngModel)]="jobPost.InterviewDate"
                 required
               />
             </div>
@@ -68,7 +42,7 @@
                 id="time"
                 placeholder="Interview Time"
                 class="formbold-form-input"
-                [(ngModel)]="jobPost.JobTitle"
+                [(ngModel)]="jobPost.InterviewTime"
                 required
               />
             </div>
@@ -86,7 +60,7 @@
               >
                 <option
                   *ngFor="let companyItem of locations"
-                  [value]="companyItem.LocationId"
+                  [value]="companyItem.City"
                 >
                   {{ companyItem.City }}
                 </option>
@@ -108,6 +82,17 @@
               required
             ></textarea>
           </div>
+          <input
+            type="hidden"
+            name="userAccountId"
+            [(ngModel)]="userAccountId"
+          />
+          <input type="hidden" name="jobPostId" [(ngModel)]="jobPostId" />
+          <input
+            type="hidden"
+            name="jobJobPosition"
+            [(ngModel)]="jobJobPosition"
+          />
 
           <button
             type="submit"

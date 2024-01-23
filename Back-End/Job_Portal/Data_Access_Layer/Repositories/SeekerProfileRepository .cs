@@ -1,7 +1,10 @@
 ﻿using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
+using Data_Access_Layer.ViewModels;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using System.ComponentModel.Design;
+using System.Data;
 
 namespace Data_Access_Layer.Repositories
 {
@@ -129,5 +132,71 @@ namespace Data_Access_Layer.Repositories
 
             return "SeekerProfile deleted successfully";
         }
+
+        public async Task<EmailInvite> CreateInterviewInvite(EmailInvite invite)
+        {
+            using (SqlConnection con = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+            {
+                await con.OpenAsync();
+
+                using (SqlCommand cmd = new SqlCommand("CreateInterviewInvite", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@CompanyId", invite.CompanyId);
+                    cmd.Parameters.AddWithValue("@JobPostId", invite.JobPostId);
+                    cmd.Parameters.AddWithValue("@UserAccountId", invite.UserAccountId);
+                    cmd.Parameters.AddWithValue("@LocationId", invite.LocationId);
+                    cmd.Parameters.AddWithValue("@InterviewDate", invite.InterviewDate);
+                    cmd.Parameters.AddWithValue("@InterviewTime", invite.InterviewTime);
+
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
+
+            return invite;
+        }
+
+        public async Task<ICollection<EmailInvite>> GetInterviewsById(int userId)
+        {
+            List<EmailInvite> emailInvites = new List<EmailInvite>();
+
+            using (SqlConnection con = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+            {
+                await con.OpenAsync();
+
+                using (SqlCommand cmd = new SqlCommand("GetInterviewDetailsByUserAccount", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@user_account_id", userId);
+
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            emailInvites.Add(new EmailInvite
+                            {
+                                InterviewId = reader.GetInt32(0),
+                                CompanyId = reader.GetInt32(1),
+                                CompanyName = reader.GetString(2),
+                                JobPostId = reader.GetInt32(3),
+                                JobDescription = reader.IsDBNull(4) ? "" : reader.GetString(4),
+                                UserAccountId = reader.GetInt32(5),
+                                UserName = reader.GetString(6),
+                                LocationId = reader.GetInt32(7),
+                                Address = reader.GetString(8),
+                                City = reader.GetString(9),
+                                InterviewDate = reader.GetDateTime(10).ToString(),
+                                InterviewTime = reader.GetTimeSpan(11).ToString(),
+                                IsAccepetd = reader.GetBoolean(12),
+                            });
+                        }
+                    }
+                }
+            }
+
+            return emailInvites;
+        }
+
     }
 }

@@ -138,5 +138,36 @@ namespace Data_Access_Layer.Repositories
 
             return "Company deleted successfully";
         }
+
+        public async Task<Company> GetCompanyByEmployeer(int empId)
+        {
+
+            Company company = new Company();
+
+            using (SqlConnection con = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+            {
+                await con.OpenAsync();
+
+                using (SqlCommand cmd = new SqlCommand("SELECT company_id, company_name, stream_id, company_description, website_url, company_image FROM company WHERE user_account_id = @UserId", con))
+                {
+                    cmd.Parameters.AddWithValue("@UserId", empId);
+
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            company.CompanyId = reader.GetInt32(0);
+                            company.CompanyName = reader.IsDBNull(1) ? "" : reader.GetString(1);
+                            company.StreamId = reader.GetInt32(2);
+                            company.CompanyDescription = reader.IsDBNull(3) ? "" : reader.GetString(3);
+                            company.WebsiteUrl = reader.IsDBNull(4) ? "" : reader.GetString(4);
+                            company.CompanyImage = reader.IsDBNull(5) ? "" : reader.GetString(5);
+                        }
+                    }
+                }
+            }
+
+            return company;
+        }
     }
 }

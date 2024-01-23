@@ -11,6 +11,7 @@ namespace Data_Access_Layer.ViewModels
         public int UserAccountId { get; set; }
         public int JobPostId { get; set; }
         public DateTime ApplyDate { get; set; }
+        public string UserName { get; set; } = string.Empty;
         public string CompanyName { get; set; } = string.Empty;
         public string JobTypeName { get; set; } = string.Empty;
         public string JobTitle { get; set; } = string.Empty;

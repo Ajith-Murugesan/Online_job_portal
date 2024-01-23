@@ -1,8 +1,6 @@
+  <section id="cntr" *ngFor="let i of jobPosts"  style="display: flex;flex-wrap: wrap;">
 
-
-<section id="cntr" *ngFor="let i of jobPosts">
-  <div class="container ">
-    <div class="card bg-light-subtle mt-4">
+    <div class=" card bg-light-subtle mt-4">
       <img
         src="https://www.logo.wine/a/logo/Amazon_(company)/Amazon_(company)-Logo.wine.svg"
         class="card-img-top"
@@ -19,9 +17,8 @@
         </div>
         <div class="cta-section" >
           <div style="background-color: #1DE789;border-radius: 5px;padding: 5px;color: white;">{{i.JobTypeName}}</div>
-          <a  class="btn btn-primary" (click)="applyJob(i.JobPostId)" >Apply</a>
+          <a *ngIf="usertypeid != 2" class="btn btn-primary" (click)="applyJob(i.JobPostId)" >Apply</a>
         </div>
       </div>
     </div>
-  </div>
 </section>

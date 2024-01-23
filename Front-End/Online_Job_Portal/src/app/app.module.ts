@@ -31,6 +31,8 @@ import { ManageJobpostComponent } from './features/employeer/manage-jobpost/mana
 import { NgToastModule } from 'ng-angular-popup';
 import { JobApplicationsComponent } from './features/employeer/job-applications/job-applications.component';
 import { JobInvitationTemplateComponent } from './features/employeer/job-invitation-template/job-invitation-template.component';
+import { EmployeerProfileComponent } from './features/employeer/employeer-profile/employeer-profile.component';
+import { InterviewInvitesComponent } from './features/job_seeker/interview-invites/interview-invites.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +56,9 @@ import { JobInvitationTemplateComponent } from './features/employeer/job-invitat
     AddJobpostComponent,
     ManageJobpostComponent,
     JobApplicationsComponent,
-    JobInvitationTemplateComponent
+    JobInvitationTemplateComponent,
+    EmployeerProfileComponent,
+    InterviewInvitesComponent
   ],
   imports: [
     BrowserModule,

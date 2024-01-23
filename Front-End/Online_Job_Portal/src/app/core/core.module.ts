@@ -7,7 +7,6 @@ import { CompaniesComponent } from './components/companies/companies.component';
 
 @NgModule({
   declarations: [
-    LandingpageComponent,
     CompaniesComponent
   ],
   imports: [

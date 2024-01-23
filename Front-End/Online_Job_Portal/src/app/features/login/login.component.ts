@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
             const token = response.body.Token;
             const typeId = response.body.UserTypename;
             const Id = response.body.UserAccountId;
+            const isfstlogin = !response.body.isFirstLogin;
             localStorage.setItem('Token:', token);
             localStorage.setItem('id:', Id);
             localStorage.setItem('Type:', typeId);
@@ -63,7 +64,7 @@ export class LoginComponent implements OnInit {
               summary: 'Successfully logged in',
               duration: 2000,
             });
-            if (this.loginForm.value.password.length === 15)
+            if (isfstlogin)
               this.router.navigate(['/passwordreset']);
             else {
               // window.location.reload()

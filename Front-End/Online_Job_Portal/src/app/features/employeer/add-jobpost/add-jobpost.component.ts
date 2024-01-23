@@ -13,11 +13,11 @@ import { NgToastService } from 'ng-angular-popup';
 export class AddJobpostComponent implements OnInit {
 
   constructor(private service:EmployeerService,private toast:NgToastService) {}
-  company!:ICompany[]
+  company!:ICompany
   locations!:ILocation[]
   jobPost: IAddJob ={
     JobPostId: 0,
-    UserAccountId: localStorage.getItem('id'),
+    UserAccountId: localStorage.getItem('id:'),
     CompanyId: 0,
     JobTypeId: 0,
     JobTitle: '',
@@ -26,14 +26,16 @@ export class AddJobpostComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.service.getCompanies().subscribe((data) => {
+    this.service.getCompanyByEmployeer(localStorage.getItem('id:')).subscribe((data) => {
       this.company = data;
+      console.log("company",data)
     });
     this.service.getlocations().subscribe((data) => {
       this.locations = data;
     });
   }
   submitForm() {
+    this.jobPost.CompanyId=this.company.CompanyId
     this.service.postJob(this.jobPost).subscribe(
       data => {
         this.toast.success({
@@ -51,6 +53,17 @@ export class AddJobpostComponent implements OnInit {
       }
     );
     
-    
+    this.resetForm()
   }
+  resetForm() {
+    this.jobPost = {
+      JobPostId: 0,
+      UserAccountId: '',
+      CompanyId: 0,
+      JobTypeId: 0,
+      JobTitle: '',
+      JobDescription: '',
+      LocationId: 0,
+    };
+}
 }

@@ -5,6 +5,7 @@ namespace Data_Access_Layer.Interfaces
     public interface ICompanyRepository
     {
         Task<Company> GetCompany(int companyId);
+        Task<Company> GetCompanyByEmployeer(int empId);
         Task<ICollection<Company>> GetAllCompanies();
         Task<Company> CreateCompany(Company company);
         Task<Company> UpdateCompany(Company updatedCompany);

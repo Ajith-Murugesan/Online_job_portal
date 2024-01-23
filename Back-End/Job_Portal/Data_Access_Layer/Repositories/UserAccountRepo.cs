@@ -26,7 +26,7 @@ namespace Data_Access_Layer.Repositories
             {
                 await con.OpenAsync();
 
-                using (SqlCommand cmd = new SqlCommand("SELECT user_account_id FROM user_account WHERE user_account_id = @UserId", con))
+                using (SqlCommand cmd = new SqlCommand("SELECT user_account_id, user_name, email, contact_number, is_active,user_type_id,password FROM user_account WHERE user_account_id = @UserId", con))
                 {
                     cmd.Parameters.AddWithValue("@UserId", id);
 
@@ -35,6 +35,12 @@ namespace Data_Access_Layer.Repositories
                         if (await reader.ReadAsync())
                         {
                             userAccount.UserAccountId = reader.GetInt32(0);
+                            userAccount.UserName = reader.GetString(1);
+                            userAccount.Email = reader.GetString(2);
+                            userAccount.ContactNumber = reader.IsDBNull(3) ? 00000000000 : reader.GetInt64(3);
+                            userAccount.IsActive = reader.IsDBNull(4) ? false : reader.GetBoolean(4);
+                            userAccount.UserTypeId = reader.IsDBNull(5) ? 0 : reader.GetInt32(5);
+                            userAccount.Password = reader.GetString(6);
                         }
                     }
                 }
@@ -167,14 +173,14 @@ namespace Data_Access_Layer.Repositories
 
             return response;
         }
-     
+
         public async Task<ResetPassword> ResetPassword(ResetPassword password)
         {
             using (SqlConnection con = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
             {
                 await con.OpenAsync();
 
-                string updateQuery = "UPDATE user_account SET password = @newpass WHERE email = @email and password=@oldpass;";
+                string updateQuery = "UPDATE user_account SET password = @newpass, is_fstlogin = 1 WHERE email = @email AND password = @oldpass;";
 
                 using (SqlCommand cmd = new SqlCommand(updateQuery, con))
                 {
@@ -187,6 +193,7 @@ namespace Data_Access_Layer.Repositories
             }
             return password;
         }
+
 
         public async Task<UserAccount> GetUser(Login usr)
         {
@@ -243,16 +250,17 @@ namespace Data_Access_Layer.Repositories
                                 UserAccountId = reader.GetInt32(0),
                                 JobPostId = reader.GetInt32(1),
                                 ApplyDate= reader.GetDateTime(2),
-                                CompanyName = reader.GetString(3),
-                                JobTypeName = reader.GetString(4),
-                                JobTitle = reader.GetString(5),
-                                JobDescription = reader.IsDBNull(6) ? "" : reader.GetString(6),
-                                CreatedDate = reader.GetDateTime(7),
-                                Address = reader.GetString(8),
-                                City = reader.GetString(9),
-                                State = reader.GetString(10),
-                                Pincode = reader.GetInt32(11),
-                                IsActive = reader.GetString(12)
+                                UserName = reader.GetString(3),
+                                CompanyName = reader.GetString(4),
+                                JobTypeName = reader.GetString(5),
+                                JobTitle = reader.GetString(6),
+                                JobDescription = reader.IsDBNull(7) ? "" : reader.GetString(7),
+                                CreatedDate = reader.GetDateTime(8),
+                                Address = reader.GetString(9),
+                                City = reader.GetString(10),
+                                State = reader.GetString(11),
+                                Pincode = reader.GetInt32(12),
+                                IsActive = reader.GetString(13)
                             });
                         }
                     }

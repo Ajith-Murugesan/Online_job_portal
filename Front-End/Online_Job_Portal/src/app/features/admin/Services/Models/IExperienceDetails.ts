@@ -1,5 +1,5 @@
 export interface IExperienceDetails{   
-    UserAccountId: number,
+    UserAccountId: any,
     IsCurrentJob: string,
     StartDate: Date,
     EndDate: Date,

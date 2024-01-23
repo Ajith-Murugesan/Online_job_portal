@@ -1,5 +1,5 @@
 export interface IJobSeekerprofile {
-  UserAccountId: number;
+  UserAccountId: any;
   FirstName: string;
   LastName: string;
   CurrentSalary: number;
