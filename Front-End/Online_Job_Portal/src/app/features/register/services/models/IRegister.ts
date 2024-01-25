@@ -3,4 +3,5 @@ export interface IRegister{
     UserTypeId: number,
     Email: string, 
     ContactNumber: number,
+    message:string
 }

@@ -1,6 +1,8 @@
 ﻿using Business_Logic_Layer.IServices;
 using Data_Access_Layer.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Job_Portal.Controllers
 {
@@ -18,36 +20,71 @@ namespace Job_Portal.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
-            var res = await _experienceDetailsService.GetExperienceDetails(id);
-            return Ok(res);
+            try
+            {
+                var res = await _experienceDetailsService.GetExperienceDetails(id);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
-            var res = await _experienceDetailsService.GetAllExperienceDetails();
-            return Ok(res);
+            try
+            {
+                var res = await _experienceDetailsService.GetAllExperienceDetails();
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpPost]
         public async Task<ActionResult> CreateExperienceDetails(ExperienceDetails experienceDetails)
         {
-            var res = await _experienceDetailsService.CreateExperienceDetails(experienceDetails);
-            return Ok(res);
+            try
+            {
+                var res = await _experienceDetailsService.CreateExperienceDetails(experienceDetails);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpPut]
         public async Task<ActionResult> UpdateExperienceDetails(ExperienceDetails updatedExperienceDetails)
         {
-            var res = await _experienceDetailsService.UpdateExperienceDetails(updatedExperienceDetails);
-            return Ok(res);
+            try
+            {
+                var res = await _experienceDetailsService.UpdateExperienceDetails(updatedExperienceDetails);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteExperienceDetails(int id)
         {
-            var res = await _experienceDetailsService.DeleteExperienceDetails(id);
-            return Ok(res);
+            try
+            {
+                var res = await _experienceDetailsService.DeleteExperienceDetails(id);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
     }
 }

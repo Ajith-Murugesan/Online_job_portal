@@ -9,6 +9,3 @@
       
     }
 }
-// Navigation properties
-//public UserAccount UserAccount { get; set; } = new UserAccount();
-//public JobPost JobPost { get; set; } = new JobPost();

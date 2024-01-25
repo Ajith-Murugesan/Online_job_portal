@@ -23,31 +23,32 @@ import { JobApplicationsComponent } from './features/employeer/job-applications/
 import { JobInvitationTemplateComponent } from './features/employeer/job-invitation-template/job-invitation-template.component';
 import { EmployeerProfileComponent } from './features/employeer/employeer-profile/employeer-profile.component';
 import { InterviewInvitesComponent } from './features/job_seeker/interview-invites/interview-invites.component';
+import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
-  {path: 'dashboard', component:DashboardComponent},
+  {path: 'dashboard', component:DashboardComponent,canActivate: [AuthGuard]},
   {path: 'register', component:RegisterComponent},
   {path: 'login', component:LoginComponent},
-  {path: 'jobseekerprofile', component:JobseekerprofileComponent},
-  {path: 'jobseekerprofile/:id', component:JobseekerprofileComponent},
+  {path: 'jobseekerprofile', component:JobseekerprofileComponent,canActivate: [AuthGuard] },
+  {path: 'jobseekerprofile/:id', component:JobseekerprofileComponent,canActivate: [AuthGuard]},
   {path: 'landingpage', component:LandingpageComponent},
   {path: '', component:LandingpageComponent},
-  {path: 'sidebar', component:SidebarComponent},
-  {path: 'approvedusers', component:ApprovedusersComponent},
-  {path: 'pendingusers', component:PendingusersComponent},
-  {path: 'passwordreset', component:PasswordresetComponent},
-  {path: 'companies', component:CompaniesComponent},
-  {path: 'jobpost', component:JobpostComponent},
-  {path: 'empnavbar', component:EmployeernavbarComponent},
-  {path: 'jobseekernavbar', component:JobseekernavbarComponent},
-  {path: 'appliedjobs', component:AppliedJobsComponent},
-  {path: 'feedback', component:FeedbackmodalComponent},
-  {path: 'addjob', component:AddJobpostComponent},
-  {path: 'managejob', component:ManageJobpostComponent},
-   {path: 'jobapplications', component:JobApplicationsComponent},
-   {path: 'mailinvite', component:JobInvitationTemplateComponent},
-   {path: 'empprofile', component:EmployeerProfileComponent},
-   {path: 'invites', component:InterviewInvitesComponent},
+  {path: 'sidebar', component:SidebarComponent,canActivate: [AuthGuard]},
+  {path: 'approvedusers', component:ApprovedusersComponent,canActivate: [AuthGuard]},
+  {path: 'pendingusers', component:PendingusersComponent,canActivate: [AuthGuard]},
+  {path: 'passwordreset', component:PasswordresetComponent,canActivate: [AuthGuard]},
+  {path: 'companies', component:CompaniesComponent,canActivate: [AuthGuard]},
+  {path: 'jobpost', component:JobpostComponent,canActivate: [AuthGuard]},
+  {path: 'empnavbar', component:EmployeernavbarComponent,canActivate: [AuthGuard]},
+  {path: 'jobseekernavbar', component:JobseekernavbarComponent,canActivate: [AuthGuard]},
+  {path: 'appliedjobs', component:AppliedJobsComponent,canActivate: [AuthGuard]},
+  {path: 'feedback', component:FeedbackmodalComponent,canActivate: [AuthGuard]},
+  {path: 'addjob', component:AddJobpostComponent,canActivate: [AuthGuard]},
+  {path: 'managejob', component:ManageJobpostComponent,canActivate: [AuthGuard]},
+   {path: 'jobapplications', component:JobApplicationsComponent,canActivate: [AuthGuard]},
+   {path: 'mailinvite', component:JobInvitationTemplateComponent,canActivate: [AuthGuard]},
+   {path: 'empprofile/:id', component:EmployeerProfileComponent,canActivate: [AuthGuard]},
+   {path: 'invites', component:InterviewInvitesComponent,canActivate: [AuthGuard]},
  
  
 ];

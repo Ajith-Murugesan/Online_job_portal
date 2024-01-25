@@ -1,4 +1,4 @@
-<div class="container" *ngFor="let i of jobApplications">
+<!-- <div class="container" *ngFor="let i of jobApplications">
   <div class="card mx-auto">
     <div class="row">
       <div class="logo ml-3 mb-3">
@@ -78,4 +78,58 @@
   </div>
 </div>
 
+ -->
+ <h1 class="text-center">Job Applications</h1>
+ <table class="table ">
+  <thead class="table-dark">
+      <tr>
+        <th>User Name</th>
+        <th>Job Title</th>
+        <th>Job Mode</th>
+        <th>Applied Date</th>
+        <th>Profile</th>
+        <th>Invite</th>
+        <th>Action</th>
+        <th>Response</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of jobApplications">
+      <td>{{i.UserName}}</td>
+      <td>{{i.JobTitle}}</td>
+      <td>{{i.JobTypeName}}</td>
+      <td>{{i.ApplyDate | date}}</td>
+      <td> <button
+        type="button"
+        class="btn btn-primary text-dark"
+        [routerLink]="['/jobseekerprofile', i.UserAccountId]"
+      >
+        <span>View Profile</span>
+      </button> </td>
+      <td> <button
+        type="button"
+        class="btn"
+        data-toggle="modal"
+        data-target="#myModal"
+        style="background-color: blueviolet;color: white;"
+        id="btn"
+        
+      >
+        Invite
+      </button></td>
+      <td><button class="btn btn-danger" (click)="onReject(i.UserAccountId,i.JobPostId)">Reject</button></td>
+      <td><h3 *ngIf="i.IsAccepted">Accepted</h3>
+        <h3 *ngIf="i.IsDeclined">Rejected</h3>
+        <!-- <h3 *ngIf="!i.IsDeclined && !i.IsAccepted">No Response</h3></td> -->
+        
+      <app-job-invitation-template
+      [userAccountId]="i.UserAccountId"
+      [jobPostId]="i.JobPostId"
+      [jobJobPosition]="i.JobTitle"
+      [userName]="i.UserName"
+    ></app-job-invitation-template>
+    
+    </tr>
 
+  </tbody>
+</table>

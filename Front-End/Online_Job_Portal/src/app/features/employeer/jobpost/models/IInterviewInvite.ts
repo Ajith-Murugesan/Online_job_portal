@@ -14,4 +14,5 @@ export interface IInterviewInvite {
   Address: string;
   City: string;
   IsAccepetd: boolean;
+  IsDeclined: boolean;
 }

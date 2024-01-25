@@ -2,6 +2,8 @@
 using Data_Access_Layer.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Job_Portal.Controllers
 {
@@ -19,36 +21,71 @@ namespace Job_Portal.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
-            var res = await _jobTypeService.GetJobType(id);
-            return Ok(res);
+            try
+            {
+                var res = await _jobTypeService.GetJobType(id);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
-            var res = await _jobTypeService.GetAllJobTypes();
-            return Ok(res);
+            try
+            {
+                var res = await _jobTypeService.GetAllJobTypes();
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpPost]
         public async Task<ActionResult> CreateJobType(JobType jobType)
         {
-            var res = await _jobTypeService.CreateJobType(jobType);
-            return Ok(res);
+            try
+            {
+                var res = await _jobTypeService.CreateJobType(jobType);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpPut]
         public async Task<ActionResult> UpdateJobType(JobType updatedJobType)
         {
-            var res = await _jobTypeService.UpdateJobType(updatedJobType);
-            return Ok(res);
+            try
+            {
+                var res = await _jobTypeService.UpdateJobType(updatedJobType);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteJobType(int id)
         {
-            var res = await _jobTypeService.DeleteJobType(id);
-            return Ok(res);
+            try
+            {
+                var res = await _jobTypeService.DeleteJobType(id);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
     }
 }

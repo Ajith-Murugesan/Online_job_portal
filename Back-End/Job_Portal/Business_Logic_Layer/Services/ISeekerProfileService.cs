@@ -1,7 +1,7 @@
 ﻿using Data_Access_Layer.Models;
 using Data_Access_Layer.ViewModels;
 
-namespace Business_Logic_Layer.IServices
+namespace Business_Logic_Layer.Services
 {
     public interface ISeekerProfileService
     {
@@ -12,5 +12,7 @@ namespace Business_Logic_Layer.IServices
         Task<SeekerProfile> CreateSeekerProfile(SeekerProfile seekerProfile);
         Task<SeekerProfile> UpdateSeekerProfile(SeekerProfile updatedSeekerProfile);
         Task<string> DeleteSeekerProfile(int userAccountId);
+        Task<string> AcceptInvite(int userAccountId);
+        Task<string> DeclineInvite(int userAccountId);
     }
 }

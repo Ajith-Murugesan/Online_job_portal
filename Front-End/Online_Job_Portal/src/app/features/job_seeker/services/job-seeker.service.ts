@@ -9,6 +9,8 @@ import { IJobSeekerprofile } from '../../register/services/models/IJobSeekerprof
 import { IExperienceDetails } from '../../admin/Services/Models/IExperienceDetails';
 import { IInvite } from '../../employeer/jobpost/models/IInvite';
 import { IInterviewInvite } from '../../employeer/jobpost/models/IInterviewInvite';
+import { ICompany } from '../../employeer/jobpost/models/ICompany';
+import { IStream } from '../../employeer/jobpost/models/IStream';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +36,18 @@ export class JobSeekerService {
   }
   getInterviewInviteById(id:any):Observable<IInterviewInvite[]> {
     return this.httpClient.get<IInterviewInvite[]>(environment.API_endpoints.getInterviewInviteById+id);
+  }
+  acceptInvite(id:any):Observable<string> {
+    return this.httpClient.put<string>(environment.API_endpoints.acceptInvite+id,id);
+  }
+  declineInvite(id:any):Observable<string> {
+    return this.httpClient.put<string>(environment.API_endpoints.declineInvite+id,id);
+  }
+  saveCompanyDetails(post:ICompany):Observable<ICompany> {
+    return this.httpClient.post<ICompany>(environment.API_endpoints.saveCompany,post);
+  }
+
+  getAllstreams():Observable<IStream[]> {
+    return this.httpClient.get<IStream[]>(environment.API_endpoints.getAllStreams);
   }
 }

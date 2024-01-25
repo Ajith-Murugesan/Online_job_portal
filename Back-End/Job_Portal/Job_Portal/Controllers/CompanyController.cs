@@ -1,6 +1,8 @@
 ﻿using Business_Logic_Layer.IServices;
 using Data_Access_Layer.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Job_Portal.Controllers
 {
@@ -18,43 +20,85 @@ namespace Job_Portal.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
-            var res = await _companyService.GetCompany(id);
-            return Ok(res);
+            try
+            {
+                var res = await _companyService.GetCompany(id);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult> GetCompanyByEmployeer(int id)
         {
-            var res = await _companyService.GetCompanyByEmployeer(id);
-            return Ok(res);
+            try
+            {
+                var res = await _companyService.GetCompanyByEmployeer(id);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
-            var res = await _companyService.GetAllCompanies();
-            return Ok(res);
+            try
+            {
+                var res = await _companyService.GetAllCompanies();
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpPost]
         public async Task<ActionResult> CreateCompany(Company company)
         {
-            var res = await _companyService.CreateCompany(company);
-            return Ok(res);
+            try
+            {
+                var res = await _companyService.CreateCompany(company);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpPut]
         public async Task<ActionResult> UpdateCompany(Company updatedCompany)
         {
-            var res = await _companyService.UpdateCompany(updatedCompany);
-            return Ok(res);
+            try
+            {
+                var res = await _companyService.UpdateCompany(updatedCompany);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteCompany(int id)
         {
-            var res = await _companyService.DeleteCompany(id);
-            return Ok(res);
+            try
+            {
+                var res = await _companyService.DeleteCompany(id);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
     }
 }

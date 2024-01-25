@@ -5,7 +5,6 @@ using Data_Access_Layer.ViewModels;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Data;
-
 namespace Data_Access_Layer.Repositories
 {
     public class UserAccountRepo : IUserAccount
@@ -80,32 +79,36 @@ namespace Data_Access_Layer.Repositories
             return users;
         }
 
-
-
         public async Task<RegisterUser> CreateAccount(RegisterUser account)
         {
-            using (SqlConnection con = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
-            {
-                await con.OpenAsync();
+           
 
-                string insertQuery = "INSERT INTO user_account (user_name,email,password,contact_number,user_type_id) VALUES (@UserName,@email,@password,@contact_number,@typeid)";
-
-                using (SqlCommand cmd = new SqlCommand(insertQuery, con))
+                using (SqlConnection con = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
                 {
-                    cmd.Parameters.AddWithValue("@UserName", account.UserName);
-                    cmd.Parameters.AddWithValue("@email", account.Email);
-                    string password = _mailService.SendEmail(account.Email);
-                    cmd.Parameters.AddWithValue("@password", password);
-                    cmd.Parameters.AddWithValue("@contact_number", account.ContactNumber);
-                    cmd.Parameters.AddWithValue("@typeid", account.UserTypeId);
-                    await cmd.ExecuteScalarAsync();
+                    await con.OpenAsync();
+
+                    string insertQuery = "INSERT INTO user_account (user_name,email,password,contact_number,user_type_id) VALUES (@UserName,@email,@password,@contact_number,@typeid)";
+
+                    using (SqlCommand cmd = new SqlCommand(insertQuery, con))
+                    {
+                        cmd.Parameters.AddWithValue("@UserName", account.UserName);
+                        cmd.Parameters.AddWithValue("@email", account.Email);
+                        string password = _mailService.SendEmail(account.Email);
+                        cmd.Parameters.AddWithValue("@password", password);
+                        cmd.Parameters.AddWithValue("@contact_number", account.ContactNumber);
+                        cmd.Parameters.AddWithValue("@typeid", account.UserTypeId);
+                        await cmd.ExecuteScalarAsync();
+
+                    }
 
                 }
 
-            }
-
-            return account;
+                return account;
+            
+           
         }
+
+
 
         public async Task<UserAccount> UpdateAccount(UserAccount updatedAccount)
         {
@@ -260,7 +263,9 @@ namespace Data_Access_Layer.Repositories
                                 City = reader.GetString(10),
                                 State = reader.GetString(11),
                                 Pincode = reader.GetInt32(12),
-                                IsActive = reader.GetString(13)
+                                IsActive = reader.GetString(13),
+                                IsAccepted=reader.GetBoolean(14),
+                                ISDeclined = reader.GetBoolean(15)
                             });
                         }
                     }
@@ -269,5 +274,7 @@ namespace Data_Access_Layer.Repositories
 
             return jobapplications;
         }
+
+       
     }
 }

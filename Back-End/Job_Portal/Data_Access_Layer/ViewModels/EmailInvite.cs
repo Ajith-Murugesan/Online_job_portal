@@ -23,5 +23,6 @@ namespace Data_Access_Layer.ViewModels
         public string Address { get; set; } = string.Empty;
         public string City { get; set; } = string.Empty;
         public bool IsAccepetd { get; set; }
+        public bool IsDeclined { get; set; }
     }
 }

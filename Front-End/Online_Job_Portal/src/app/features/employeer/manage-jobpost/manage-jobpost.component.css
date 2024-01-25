@@ -1,5 +1,5 @@
 .card {
-    max-width: 30em;
+    width: 60em;
     flex-direction: row;
     background-color: #696969;
     border: 0;

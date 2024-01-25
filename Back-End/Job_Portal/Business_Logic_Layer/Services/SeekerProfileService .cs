@@ -1,5 +1,4 @@
-﻿using Business_Logic_Layer.IServices;
-using Data_Access_Layer.Interfaces;
+﻿using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
 using Data_Access_Layer.ViewModels;
 using System.ComponentModel;
@@ -48,6 +47,15 @@ namespace Business_Logic_Layer.Services
         public async Task<ICollection<EmailInvite>> GetInterviewsById(int userId)
         {
             return await _seekerProfileRepository.GetInterviewsById(userId);
+        }
+
+        public async Task<string> AcceptInvite(int userAccountId)
+        {
+            return await _seekerProfileRepository.AcceptInvite(userAccountId);
+        }
+        public async Task<string> DeclineInvite(int userAccountId)
+        {
+            return await _seekerProfileRepository.DeclineInvite(userAccountId);
         }
     }
 }

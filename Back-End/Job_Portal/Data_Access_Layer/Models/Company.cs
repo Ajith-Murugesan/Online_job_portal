@@ -8,9 +8,8 @@
         public string CompanyDescription { get; set; } = string.Empty;
         public string WebsiteUrl { get; set; } = string.Empty;
         public string CompanyImage { get; set; } = string.Empty;
+        public int UserAccountId { get; set; }
 
-       
+
     }
 }
-// Navigation property
-//public BusinessStream BusinessStream { get; set; } = new BusinessStream();

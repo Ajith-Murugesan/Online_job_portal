@@ -110,7 +110,6 @@ namespace Data_Access_Layer.Repositories
             message.Subject = "ItzHirings - Feedback";
             message.To.Add(new MailAddress(toEmail));
 
-            // registration message template
             string registrationMessage = "<html><body>" +
                                         "<h2>Feedback from ItzHirings!</h2>" +
                                         "<h3>Feedback - {feedMsg}</h3>" +
@@ -150,13 +149,6 @@ namespace Data_Access_Layer.Repositories
                 InterviewTime = invite.InterviewTime,
                 LocationName = invite.LocationName
             };
-            // registration message template
-            string registrationMessage = "<html><body>" +
-                                        "<h2>Interview Invitation from ItzHirings!</h2>" +
-                                        "<h3>Company Name - {cmpname}</h3>" +
-                                        "<h4>Your account has been Rejected.</h4>" +
-                                        "<p>Sorry for you inconvience, Please go through the feedback message and try again.</p>" +
-                                        "</body></html>";
             string emailTemplate = @"
             <!DOCTYPE html>
             <html lang=""en"">

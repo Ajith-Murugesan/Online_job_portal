@@ -80,7 +80,7 @@ namespace Data_Access_Layer.Repositories
             {
                 await con.OpenAsync();
 
-                string insertQuery = "INSERT INTO company (company_name, stream_id, company_description, website_url, company_image) VALUES (@CompanyName, @StreamId, @CompanyDescription, @WebsiteUrl, @CompanyImage);";
+                string insertQuery = "INSERT INTO company (company_name, stream_id, company_description, website_url, company_image,user_account_id) VALUES (@CompanyName, @StreamId, @CompanyDescription, @WebsiteUrl, @CompanyImage,@user_account_id);";
 
                 using (SqlCommand cmd = new SqlCommand(insertQuery, con))
                 {
@@ -89,6 +89,7 @@ namespace Data_Access_Layer.Repositories
                     cmd.Parameters.AddWithValue("@CompanyDescription", company.CompanyDescription);
                     cmd.Parameters.AddWithValue("@WebsiteUrl", company.WebsiteUrl);
                     cmd.Parameters.AddWithValue("@CompanyImage", company.CompanyImage);
+                    cmd.Parameters.AddWithValue("@user_account_id", company.UserAccountId);
 
                     await cmd.ExecuteNonQueryAsync();
                 }
@@ -158,7 +159,7 @@ namespace Data_Access_Layer.Repositories
                         {
                             company.CompanyId = reader.GetInt32(0);
                             company.CompanyName = reader.IsDBNull(1) ? "" : reader.GetString(1);
-                            company.StreamId = reader.GetInt32(2);
+                            company.StreamId = reader.IsDBNull(2) ? 0 : reader.GetInt32(2);
                             company.CompanyDescription = reader.IsDBNull(3) ? "" : reader.GetString(3);
                             company.WebsiteUrl = reader.IsDBNull(4) ? "" : reader.GetString(4);
                             company.CompanyImage = reader.IsDBNull(5) ? "" : reader.GetString(5);
