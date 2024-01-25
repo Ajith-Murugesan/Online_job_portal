@@ -13,5 +13,7 @@ namespace Data_Access_Layer.Interfaces
         Task<ICollection<EmailInvite>> GetInterviewsById(int userId);
         Task<SeekerProfile> UpdateSeekerProfile(SeekerProfile updatedSeekerProfile);
         Task<string> DeleteSeekerProfile(int userAccountId);
+        Task<string> AcceptInvite(int userAccountId);
+        Task<string> DeclineInvite(int userAccountId);
     }
 }

@@ -5,5 +5,6 @@ export interface ICompany {
     CompanyDescription: string;
     WebsiteUrl: string;
     CompanyImage: string;
+    UserAccountId:any
   }
   

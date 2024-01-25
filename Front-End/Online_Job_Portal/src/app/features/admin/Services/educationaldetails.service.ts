@@ -26,6 +26,9 @@ export class EducationaldetailsService {
   getUser(usr:ILogin):Observable<IUserAccount> {
     return this.httpClient.get<IUserAccount>(`https://localhost:7119/UserAccount/GetUser?Email=${usr.Email}&Password=${usr.Password}`);
   }
+  getUserById(id:any):Observable<IUserAccount> {
+    return this.httpClient.get<IUserAccount>(`https://localhost:7119/UserAccount/Get/${id}`);
+  }
 
   getExperienceDetails(id:any):Observable<IExperienceDetails> {
     return this.httpClient.get<IExperienceDetails>(environment.API_endpoints.experienceDetails+id);

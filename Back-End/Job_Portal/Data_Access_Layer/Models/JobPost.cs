@@ -15,8 +15,3 @@
         
     }
 }
-// Navigation properties
-// public UserAccount UserAccount { get; set; } = new UserAccount();
-//public Company Company { get; set; } = new Company();
-//public JobType JobType { get; set; } = new JobType();
-//public JobLocation JobLocation { get; set; } = new JobLocation();

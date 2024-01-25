@@ -11,7 +11,7 @@ export class AppliedJobsComponent implements OnInit{
   constructor(private jservice: JobSeekerService) {}
   jobPosts!: IJobpost[];
   ngOnInit(): void {
-    this.jservice.appliedJobs(localStorage.getItem('id')).subscribe((data) => {
+    this.jservice.appliedJobs(localStorage.getItem('id:')).subscribe((data) => {
       this.jobPosts = data;
       console.log(data)
     });

@@ -1,6 +1,5 @@
 <main class="card-container slideUp-animation">
   <div class="image-container">
-    <h1 class="company" routerLink="/" style="cursor: pointer;">ItzHirings <sup>&trade;</sup></h1>
     <img src="../../../assets/images/signUp.svg" class="illustration" alt="" />
     <p class="quote">Sign up today to get exciting Jobs!</p>
     <a href="#btm" class="mobile-btm-nav">
@@ -35,15 +34,13 @@
         <label for="userType">USER TYPE</label> <br>
         <select name="userType" id="userType" class="btn-select" formControlName="userType">
           <option value="1">Applicant</option>
-          <option value="2">Employer</option>
+          <option value="2">Employeer</option>
         </select>
         <br>
         <hr>
-      </div>
-      
-      
+      </div>     
       <div id="btm">
-        <button type="submit" class="submit-btn mt-4 text-white" style="background-color: #1DE789;">
+        <button type="submit" class="submit-btn mt-4 text-white" style="background-color: #1DE789;" [disabled]="registrationForm.invalid">
           Create Account
         </button>
         <p class="btm-text">
@@ -67,11 +64,4 @@
     id="signedUp-illustration"
     class="slideRight-animation"
   />
-  <div class="author-link">
-    &copy;&nbsp;
-    <a href="https://www.0xabdulkhalid.ml/">0xabdulkhalid</a> |
-    <a href="https://www.github.com/0xabdulkhalid/basket-sign-up-form/"
-      >Source Code</a
-    >
-  </div>
 </section>

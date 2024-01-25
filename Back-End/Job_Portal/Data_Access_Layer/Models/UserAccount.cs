@@ -17,8 +17,3 @@
        
     }
 }
-// Navigation properties
-/*   public UserType UserType { get; set; } = new UserType();
-   public SeekerProfile SeekerProfile { get; set; } = new SeekerProfile();
-   public EducationalDetails EducationalDetails { get; set; } = new EducationalDetails();
-   public ExperienceDetails ExperienceDetails { get; set; } = new ExperienceDetails();*/

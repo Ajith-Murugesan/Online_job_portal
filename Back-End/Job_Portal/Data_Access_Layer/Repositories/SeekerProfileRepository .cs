@@ -189,6 +189,7 @@ namespace Data_Access_Layer.Repositories
                                 InterviewDate = reader.GetDateTime(10).ToString(),
                                 InterviewTime = reader.GetTimeSpan(11).ToString(),
                                 IsAccepetd = reader.GetBoolean(12),
+                                IsDeclined=reader.GetBoolean(13)
                             });
                         }
                     }
@@ -198,5 +199,44 @@ namespace Data_Access_Layer.Repositories
             return emailInvites;
         }
 
+        public async Task<string> AcceptInvite(int userAccountId)
+        {
+            using (SqlConnection con = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+            {
+                await con.OpenAsync();
+
+                string updateQuery = "UPDATE interview_invites SET is_accepted = 1 WHERE interview_id = @UserAccountId;";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, con))
+                {
+                    cmd.Parameters.AddWithValue("@UserAccountId", userAccountId);
+                    
+
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
+
+            return "Invite Accepted";
+        }
+
+        public async Task<string> DeclineInvite(int userAccountId)
+        {
+            using (SqlConnection con = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+            {
+                await con.OpenAsync();
+
+                string updateQuery = "UPDATE interview_invites SET is_declined = 1 WHERE interview_id = @UserAccountId;";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, con))
+                {
+                    cmd.Parameters.AddWithValue("@UserAccountId", userAccountId);
+
+
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
+
+            return "Invite Declined";
+        }
     }
 }

@@ -12,5 +12,3 @@
        
     }
 }
-// Navigation property
-//public UserAccount UserAccount { get; set; } = new UserAccount();

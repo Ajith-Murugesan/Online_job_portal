@@ -22,5 +22,7 @@ namespace Data_Access_Layer.ViewModels
         public string State { get; set; } = string.Empty;
         public int Pincode { get; set; } = 0;
         public string IsActive { get; set; } = string.Empty;
+        public bool IsAccepted { get; set; }
+        public bool ISDeclined { get; set; } 
     }
 }

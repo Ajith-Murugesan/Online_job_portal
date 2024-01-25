@@ -55,5 +55,11 @@ export class EmployeerService {
     return this.httpClient.post<IInvite>(
       environment.API_endpoints.createEmailInvite,info);
   }
+  withdrawApplication(userId:number,JPid:number): Observable<string>
+  {
+    {
+      return this.httpClient.delete<string>(environment.API_endpoints.rejectApplication+userId+"/"+JPid);
+    }
+  }
   
 }

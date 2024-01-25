@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import {MatTabsModule} from '@angular/material/tabs';
 import {
   BrowserModule,
   provideClientHydration,
@@ -33,6 +34,7 @@ import { JobApplicationsComponent } from './features/employeer/job-applications/
 import { JobInvitationTemplateComponent } from './features/employeer/job-invitation-template/job-invitation-template.component';
 import { EmployeerProfileComponent } from './features/employeer/employeer-profile/employeer-profile.component';
 import { InterviewInvitesComponent } from './features/job_seeker/interview-invites/interview-invites.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +71,7 @@ import { InterviewInvitesComponent } from './features/job_seeker/interview-invit
     HttpClientModule,
     CommonModule,
     NgToastModule,
+    MatTabsModule,
   ],
   providers: [provideClientHydration()],
   bootstrap: [AppComponent],

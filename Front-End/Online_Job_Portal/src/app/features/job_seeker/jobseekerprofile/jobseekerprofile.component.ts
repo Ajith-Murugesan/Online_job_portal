@@ -17,12 +17,13 @@ export class JobseekerprofileComponent implements OnInit {
   UserDetails!: IUserAccount;
   userProfile:any={
     FirstName:'',
-    LastName:''
+    LastName:'',
   }
   educationalDetails!: IEducationalDetail;
   experienceDetails!: IExperienceDetails;
   profile!:IJobSeekerprofile
   userId!:number
+  usertypeid:any = null;
   constructor( private toast:NgToastService,private service: EducationaldetailsService,private route: ActivatedRoute,private jservice: JobSeekerService) {}
 
   ngOnInit(): void {
@@ -30,23 +31,31 @@ export class JobseekerprofileComponent implements OnInit {
       this.userId = +params.get('id')!;     
       console.log('User ID:', this.userId);
     });
-    const cred = this.decodeJwtToken(localStorage.getItem('Token:'));
-    this.service.getUser({ Email: cred.Email, Password: cred.Password }).subscribe((data) => {
+    this.service.getUserById(this.userId).subscribe((data) => {
       this.UserDetails = data;
       localStorage.setItem('id', data.UserAccountId.toString());
     });
+    if (typeof localStorage !== 'undefined') {
+      this.usertypeid = localStorage.getItem('Type:');
+      const cred = this.decodeJwtToken(localStorage.getItem('Token:'));
+      this.service.getUser({ Email: cred.Email, Password: cred.Password }).subscribe((data) => {
+        this.UserDetails = data;
+        localStorage.setItem('id', data.UserAccountId.toString());
 
-    this.service.getEducationalDetails(this.userId).subscribe((data) => {
-      this.educationalDetails = data;
-    });
-
-    this.service.getExperienceDetails(this.userId).subscribe((data) => {
-      this.experienceDetails = data;
-    });
-
-    this.service.getJobseekerDetails(this.userId).subscribe((data) => {
-      this.profile = data;
-    });
+      });
+     
+      this.service.getEducationalDetails(this.userId).subscribe((data) => {
+        this.educationalDetails = data;
+      });
+  
+      this.service.getExperienceDetails(this.userId).subscribe((data) => {
+        this.experienceDetails = data;
+      });
+  
+      this.service.getJobseekerDetails(this.userId).subscribe((data) => {
+        this.profile = data;
+      });
+    }
   }
 
   decodeJwtToken(token: any): any {

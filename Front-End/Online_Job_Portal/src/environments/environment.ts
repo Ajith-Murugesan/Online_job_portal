@@ -24,6 +24,11 @@ export const environment = {
         getCompanyByEmployeer:"https://localhost:7119/Company/GetCompanyByEmployeer/",
         jobseekerProfileSave:"https://localhost:7119/SeekerProfile/CreateSeekerProfile",
         saveExperienceDetails:"https://localhost:7119/ExperienceDetails/CreateExperienceDetails",
-        getInterviewInviteById:"https://localhost:7119/SeekerProfile/GetInterviewInviteById/"
+        getInterviewInviteById:"https://localhost:7119/SeekerProfile/GetInterviewInviteById/",
+        acceptInvite:"https://localhost:7119/SeekerProfile/AcceptInvite?id=",
+        declineInvite:"https://localhost:7119/SeekerProfile/DeclineInvite?id=",
+        saveCompany:"https://localhost:7119/Company/CreateCompany",
+        rejectApplication:"https://localhost:7119/JobPostActivity/WithdrawApplication/",
+        getAllStreams:"https://localhost:7119/BusinessStream/GetAll"
     }
 };

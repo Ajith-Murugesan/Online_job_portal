@@ -17,7 +17,7 @@ export class AddJobpostComponent implements OnInit {
   locations!:ILocation[]
   jobPost: IAddJob ={
     JobPostId: 0,
-    UserAccountId: localStorage.getItem('id:'),
+    UserAccountId: localStorage.getItem('id'),
     CompanyId: 0,
     JobTypeId: 0,
     JobTitle: '',
@@ -36,6 +36,7 @@ export class AddJobpostComponent implements OnInit {
   }
   submitForm() {
     this.jobPost.CompanyId=this.company.CompanyId
+    this.company.UserAccountId=localStorage.getItem("id")
     this.service.postJob(this.jobPost).subscribe(
       data => {
         this.toast.success({

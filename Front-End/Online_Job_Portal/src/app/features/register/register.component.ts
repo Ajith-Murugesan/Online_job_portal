@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
     UserTypeId: 0,
     Email: '',
     ContactNumber: 0,
+    message: '',
   };
   formFields = [
     {
@@ -35,7 +36,7 @@ export class RegisterComponent implements OnInit {
       name: 'phone',
       type: 'tel',
       label: 'Phone',
-      errorMessage: 'Phone number is required',
+      errorMessage: 'Invalid phone number',
     },
   ];
   isSubmitted = false;
@@ -44,17 +45,17 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private service: RegisterService,
     private router: Router,
-    private toast:NgToastService
+    private toast: NgToastService
   ) {}
 
   ngOnInit() {
-    console.log('Event')
+    console.log('Event');
 
     this.registrationForm = this.formBuilder.group({
       firstName: ['', Validators.required],
-      userType: [2, Validators.required],
+      userType: [1, Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
     });
   }
 
@@ -65,25 +66,35 @@ export class RegisterComponent implements OnInit {
         UserTypeId: this.registrationForm.value.userType,
         Email: this.registrationForm.value.email,
         ContactNumber: this.registrationForm.value.phone,
+        message: '',
       };
       this.service.createUsers(this.User).subscribe(
-        usr => {
-          this.toast.success({
-            detail: "WELCOME",
-            summary: 'Registration successful',
-            duration: 2000
-          });
-          this.router.navigate(['/login']);
+        (usr) => {
+          const mag = usr.message === 'Email already exists!';
+          if (mag) {
+            this.toast.error({
+              detail: 'SORRY',
+              summary: 'Email already exists!',
+              duration: 3000,
+            });
+          } else {
+            this.toast.success({
+              detail: 'WELCOME',
+              summary: 'Registered Successfully',
+              duration: 2000,
+            });
+            this.router.navigate(['/login']);
+          }
         },
-        error => {
+        (error) => {
           this.toast.error({
-            detail: "SORRY",
+            detail: 'SORRY',
             summary: 'Registration failed',
-            duration: 3000
+            duration: 3000,
           });
         }
       );
-      
+
       this.isSubmitted = true;
     }
   }
